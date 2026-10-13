@@ -3,7 +3,7 @@ import { useMotionValue } from 'framer-motion';
 
 const WORD_MS = 340;
 
-/** Estimated on-screen duration (ms) of a transcript line. */
+/** Estimated on-screen duration (ms) of a transcript line if no audio file exists. */
 export const estimateLine = (line) =>
   line.speaker === 'system' ? 1400 : Math.max(1600, line.text.split(/\s+/).length * WORD_MS);
 
@@ -22,41 +22,52 @@ function pickVoice(voices, prefs, exclude) {
 }
 
 /**
- * Plays a scripted call. Uses the browser's Web Speech API (two distinct voices)
- * when available and unmuted; otherwise runs a timed "silent" simulation so the
- * UI (waveform, transcript, progress) always works out of the box.
- *
- * To use real recorded audio, swap the utterance block for an <audio> element per line.
+ * Plays a scripted call.
+ * 1. Primary: Uses high-definition pre-generated ElevenLabs audio files (HTML5 Audio).
+ * 2. Fallback: Browser's Web Speech API if audio files are not yet generated or fail to load.
+ * 3. Silent simulation: Runs accurately if muted or audio is unsupported.
  */
 export function useCallPlayback() {
-  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  const speechSupported = typeof window !== 'undefined' && 'speechSynthesis' in window;
   const [status, setStatus] = useState('idle'); // idle | playing | paused | done
   const [lineIndex, setLineIndex] = useState(-1);
   const [speaker, setSpeaker] = useState(null);
   const [elapsed, setElapsed] = useState(0);
-  const [muted, setMuted] = useState(!supported);
+  const [muted, setMuted] = useState(false);
+  const [isRealAudio, setIsRealAudio] = useState(false);
   const progress = useMotionValue(0);
 
   const session = useRef(0);
   const timer = useRef(0);
   const raf = useRef(0);
+  const currentAudio = useRef(null);
   const voices = useRef([]);
   const mutedRef = useRef(muted);
 
   useEffect(() => {
     mutedRef.current = muted;
-    if (muted && supported) window.speechSynthesis.cancel();
-  }, [muted, supported]);
+    if (currentAudio.current) {
+      currentAudio.current.muted = muted;
+    }
+    if (muted && speechSupported) {
+      window.speechSynthesis.cancel();
+    }
+  }, [muted, speechSupported]);
 
   const halt = useCallback(() => {
     session.current += 1;
     clearTimeout(timer.current);
     cancelAnimationFrame(raf.current);
-    if (supported) window.speechSynthesis.cancel();
-  }, [supported]);
+    if (currentAudio.current) {
+      currentAudio.current.pause();
+      currentAudio.current.src = '';
+      currentAudio.current = null;
+    }
+    if (speechSupported) window.speechSynthesis.cancel();
+  }, [speechSupported]);
 
   useEffect(() => {
-    if (!supported) return undefined;
+    if (!speechSupported) return undefined;
     const load = () => { voices.current = window.speechSynthesis.getVoices(); };
     load();
     window.speechSynthesis.addEventListener?.('voiceschanged', load);
@@ -64,7 +75,7 @@ export function useCallPlayback() {
       window.speechSynthesis.removeEventListener?.('voiceschanged', load);
       halt();
     };
-  }, [supported, halt]);
+  }, [speechSupported, halt]);
 
   const play = useCallback(
     (lines, from = 0) => {
@@ -84,6 +95,7 @@ export function useCallPlayback() {
           setElapsed(Math.round(total / 1000));
           return;
         }
+
         const line = lines[i];
         const start = performance.now();
         let finished = false;
@@ -92,9 +104,12 @@ export function useCallPlayback() {
 
         const tick = () => {
           if (id !== session.current) return;
-          const ms = offsets[i] + Math.min(durations[i] * 0.98, performance.now() - start);
-          progress.set(ms / total);
-          const s = Math.floor(ms / 1000);
+          const currentProgress = currentAudio.current && currentAudio.current.duration
+            ? offsets[i] + (currentAudio.current.currentTime * 1000)
+            : offsets[i] + Math.min(durations[i] * 0.98, performance.now() - start);
+
+          progress.set(Math.min(1, currentProgress / total));
+          const s = Math.floor(currentProgress / 1000);
           setElapsed((prev) => (prev === s ? prev : s));
           raf.current = requestAnimationFrame(tick);
         };
@@ -107,31 +122,79 @@ export function useCallPlayback() {
           cancelAnimationFrame(raf.current);
           progress.set((offsets[i] + durations[i]) / total);
           setSpeaker(null);
-          timer.current = setTimeout(() => run(i + 1), 380);
+          timer.current = setTimeout(() => run(i + 1), 320);
         };
 
-        if (line.speaker === 'system' || mutedRef.current || !supported) {
+        // System lines are silent UI updates (e.g. PMS write-back)
+        if (line.speaker === 'system' || mutedRef.current) {
           timer.current = setTimeout(next, durations[i]);
           return;
         }
 
-        const u = new SpeechSynthesisUtterance(line.text);
-        const agentVoice = pickVoice(voices.current, AGENT_PREFS);
-        const voice = line.speaker === 'agent' ? agentVoice : pickVoice(voices.current, PATIENT_PREFS, agentVoice);
-        if (voice) u.voice = voice;
-        u.lang = voice?.lang || 'en-US';
-        u.rate = line.speaker === 'agent' ? 1.04 : 1;
-        u.pitch = line.speaker === 'agent' ? 1.08 : 0.88;
-        u.onend = next;
-        u.onerror = next;
-        // watchdog in case a browser never fires onend
-        timer.current = setTimeout(next, durations[i] * 2.6 + 1500);
-        window.speechSynthesis.speak(u);
+        // 1. Try real recorded ElevenLabs audio if URL is provided
+        if (line.audioUrl) {
+          const audio = new Audio(line.audioUrl);
+          currentAudio.current = audio;
+          audio.muted = mutedRef.current;
+
+          let hasStarted = false;
+
+          audio.onplay = () => {
+            hasStarted = true;
+            setIsRealAudio(true);
+          };
+
+          audio.onended = () => {
+            currentAudio.current = null;
+            next();
+          };
+
+          audio.onerror = () => {
+            // If real audio file isn't found (e.g. 404 before generation), fallback to browser speech
+            setIsRealAudio(false);
+            if (!hasStarted) {
+              fallbackToSpeech();
+            } else {
+              next();
+            }
+          };
+
+          const playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {
+              // Browser autoplay blocked or file missing -> fallback
+              fallbackToSpeech();
+            });
+          }
+          return;
+        }
+
+        // 2. Fallback to Web Speech API
+        function fallbackToSpeech() {
+          if (!speechSupported) {
+            timer.current = setTimeout(next, durations[i]);
+            return;
+          }
+
+          const u = new SpeechSynthesisUtterance(line.text);
+          const agentVoice = pickVoice(voices.current, AGENT_PREFS);
+          const voice = line.speaker === 'agent' ? agentVoice : pickVoice(voices.current, PATIENT_PREFS, agentVoice);
+          if (voice) u.voice = voice;
+          u.lang = voice?.lang || 'en-US';
+          u.rate = line.speaker === 'agent' ? 1.04 : 1;
+          u.pitch = line.speaker === 'agent' ? 1.08 : 0.88;
+          u.onend = next;
+          u.onerror = next;
+          timer.current = setTimeout(next, durations[i] * 2.6 + 1500);
+          window.speechSynthesis.speak(u);
+        }
+
+        fallbackToSpeech();
       };
 
       run(from);
     },
-    [halt, progress, supported]
+    [halt, progress, speechSupported]
   );
 
   const pause = useCallback(() => {
@@ -149,5 +212,18 @@ export function useCallPlayback() {
     progress.set(0);
   }, [halt, progress]);
 
-  return { status, lineIndex, speaker, elapsed, progress, play, pause, stop, muted, setMuted, supported };
+  return {
+    status,
+    lineIndex,
+    speaker,
+    elapsed,
+    progress,
+    play,
+    pause,
+    stop,
+    muted,
+    setMuted,
+    supported: speechSupported,
+    isRealAudio,
+  };
 }

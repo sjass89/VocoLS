@@ -89,9 +89,7 @@ export default function AudioPlayground({ autoplayToken }) {
               );
             })}
             <p className="px-1 pt-2 text-xs leading-relaxed text-silver/60">
-              {pb.supported
-                ? "Demo voice uses your browser's speech engine to approximate VocoRx's neural voice. Patient data is fictional."
-                : 'Audio is unavailable in this browser — the call runs as a silent visual simulation. Patient data is fictional.'}
+              Conversational audio powered by ElevenLabs neural voices (Lucy as Ava, Josh as Patient). Patient data is fictional.
             </p>
           </Reveal>
 
@@ -108,7 +106,9 @@ export default function AudioPlayground({ autoplayToken }) {
                   <p className="text-sm text-silver">{scenario.pharmacy} → {scenario.patient}</p>
                 </div>
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="rounded-full border border-white/10 px-2.5 py-1 text-silver">Voice: Ava · Neural</span>
+                  <span className="rounded-full border border-brand-cyan/40 bg-brand-cyan/10 px-2.5 py-1 text-brand-cyan">
+                    Voice: ElevenLabs HD
+                  </span>
                   <span className="rounded-full border border-brand-teal/30 bg-brand-teal/10 px-2.5 py-1 text-brand-teal">HIPAA</span>
                 </div>
               </div>
