@@ -10,8 +10,9 @@
     {
       "index": 1,
       "speaker": "patient",
+      "voiceId": "56AoDkrOh6qfVPDXZ7Pt",
       "audioUrl": "/audio/scenarios/medsync/line-1.mp3",
-      "bytes": 56050,
+      "bytes": 58558,
       "model": "eleven_v4"
     },
     {
@@ -24,8 +25,9 @@
     {
       "index": 3,
       "speaker": "patient",
+      "voiceId": "56AoDkrOh6qfVPDXZ7Pt",
       "audioUrl": "/audio/scenarios/medsync/line-3.mp3",
-      "bytes": 63991,
+      "bytes": 70261,
       "model": "eleven_v4"
     },
     {
@@ -38,8 +40,9 @@
     {
       "index": 5,
       "speaker": "patient",
+      "voiceId": "56AoDkrOh6qfVPDXZ7Pt",
       "audioUrl": "/audio/scenarios/medsync/line-5.mp3",
-      "bytes": 40586,
+      "bytes": 49781,
       "model": "eleven_v4"
     }
   ],
@@ -98,8 +101,9 @@
     {
       "index": 1,
       "speaker": "patient",
+      "voiceId": "56AoDkrOh6qfVPDXZ7Pt",
       "audioUrl": "/audio/scenarios/specialty/line-1.mp3",
-      "bytes": 49781,
+      "bytes": 56050,
       "model": "eleven_v4"
     },
     {
@@ -112,8 +116,9 @@
     {
       "index": 3,
       "speaker": "patient",
+      "voiceId": "56AoDkrOh6qfVPDXZ7Pt",
       "audioUrl": "/audio/scenarios/specialty/line-3.mp3",
-      "bytes": 38078,
+      "bytes": 40586,
       "model": "eleven_v4"
     },
     {

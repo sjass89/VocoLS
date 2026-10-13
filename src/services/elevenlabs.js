@@ -5,7 +5,8 @@
 
 export const VOICES = {
   AVA_LUCY: 'r5iFzIytiA1rzjhWFCjW', // Lucy - Friendly, Relaxed & Thoughtful (Ava Agent)
-  PATIENT_JOSH: 'ZoiZ8fuDWInAcwPXaVeq', // Josh - Warm, Smooth and Steady (Patient)
+  PATIENT_JOSH: 'ZoiZ8fuDWInAcwPXaVeq', // Josh - Warm, Smooth and Steady (Male Patient)
+  PATIENT_FEMALE: '56AoDkrOh6qfVPDXZ7Pt', // Cassidy - Crisp, Direct and Clear (Female Patient)
 };
 
 const audioCache = new Map();

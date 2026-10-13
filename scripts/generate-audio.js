@@ -32,7 +32,8 @@ const API_KEY = process.env.ELEVENLABS_API_KEY || process.argv[2];
 // Voice configurations
 export const VOICES = {
   lucy: 'r5iFzIytiA1rzjhWFCjW', // Lucy - Ava Agent
-  josh: 'ZoiZ8fuDWInAcwPXaVeq', // Josh - Patient
+  josh: 'ZoiZ8fuDWInAcwPXaVeq', // Josh - Male Patient (James, Robert)
+  cassidy: '56AoDkrOh6qfVPDXZ7Pt', // Cassidy - Female Patient (Sarah, Maria)
 };
 
 // Voice settings for natural conversational pace and medical accuracy
@@ -46,6 +47,25 @@ const VOICE_PROFILES = {
       speed: 1.14, // Brisk, natural pharmacy professional pace (fixes slow speech)
     },
   },
+  patient_male: {
+    voiceId: VOICES.josh,
+    name: 'Josh (Male Patient)',
+    settings: {
+      stability: 0.50,
+      similarity_boost: 0.80,
+      speed: 1.05,
+    },
+  },
+  patient_female: {
+    voiceId: VOICES.cassidy,
+    name: 'Cassidy (Female Patient - 56AoDkrOh6qfVPDXZ7Pt)',
+    settings: {
+      stability: 0.50,
+      similarity_boost: 0.80,
+      speed: 1.05,
+    },
+  },
+  // Backward compatibility alias
   patient: {
     voiceId: VOICES.josh,
     name: 'Josh (Patient)',
@@ -64,6 +84,7 @@ const SCENARIOS = [
   {
     id: 'medsync',
     title: 'MedSync Batch Call',
+    patientGender: 'female', // Sarah M.
     lines: [
       {
         speaker: 'agent',
@@ -101,6 +122,7 @@ const SCENARIOS = [
   {
     id: 'chronic',
     title: 'Chronic Care Check-in',
+    patientGender: 'male', // James R.
     lines: [
       {
         speaker: 'agent',
@@ -138,6 +160,7 @@ const SCENARIOS = [
   {
     id: 'specialty',
     title: 'Specialty Refill Confirmation',
+    patientGender: 'female', // Maria L.
     lines: [
       {
         speaker: 'agent',
@@ -170,6 +193,7 @@ const SCENARIOS = [
   {
     id: 'escalation',
     title: 'Clinical Escalation Triage',
+    patientGender: 'male', // Robert K.
     lines: [
       {
         speaker: 'agent',
@@ -243,16 +267,21 @@ function fetchTTS(text, voiceProfile, modelId = 'eleven_v4') {
 }
 
 async function main() {
-  // Parse command line arguments: --scenario <id>
+  // Parse command line arguments: --scenario <id>, --only-patient
   const targetScenarioArg = process.argv.indexOf('--scenario');
   const targetScenarioId = targetScenarioArg !== -1 ? process.argv[targetScenarioArg + 1] : null;
+  const onlyPatient = process.argv.includes('--only-patient');
 
   console.log('--- VocoRx ElevenLabs Audio Generator (Model: eleven_v4) ---');
   console.log('Using API Key:', API_KEY ? `${API_KEY.slice(0, 6)}...${API_KEY.slice(-4)}` : 'MISSING');
-  console.log(`Agent Profile: Lucy (speed: ${VOICE_PROFILES.agent.settings.speed}x, stability: ${VOICE_PROFILES.agent.settings.stability})`);
-  console.log(`Patient Profile: Josh (speed: ${VOICE_PROFILES.patient.settings.speed}x, stability: ${VOICE_PROFILES.patient.settings.stability})`);
+  console.log(`Agent Profile: Lucy (${VOICE_PROFILES.agent.voiceId})`);
+  console.log(`Male Patient Profile: Josh (${VOICE_PROFILES.patient_male.voiceId})`);
+  console.log(`Female Patient Profile: Cassidy (${VOICE_PROFILES.patient_female.voiceId})`);
   if (targetScenarioId) {
     console.log(`Targeting single scenario: "${targetScenarioId}"`);
+  }
+  if (onlyPatient) {
+    console.log(`Mode: --only-patient (regenerating patient lines only)`);
   }
   console.log('');
 
@@ -279,7 +308,7 @@ async function main() {
   }
 
   for (const scenario of scenariosToRun) {
-    console.log(`\n▶ Generating Scenario: ${scenario.id} (${scenario.title})`);
+    console.log(`\n▶ Generating Scenario: ${scenario.id} (${scenario.title}) - Patient Gender: ${scenario.patientGender || 'male'}`);
     const scenarioDir = path.join(outDir, scenario.id);
     fs.mkdirSync(scenarioDir, { recursive: true });
 
@@ -291,19 +320,39 @@ async function main() {
       const filePath = path.join(scenarioDir, filename);
       const publicPath = `/audio/scenarios/${scenario.id}/${filename}`;
 
-      const profile = line.speaker === 'agent' ? VOICE_PROFILES.agent : VOICE_PROFILES.patient;
-      const speechToSynthesize = line.speechText || line.text;
+      let profile;
+      if (line.speaker === 'agent') {
+        profile = VOICE_PROFILES.agent;
+      } else if (scenario.patientGender === 'female') {
+        profile = VOICE_PROFILES.patient_female;
+      } else {
+        profile = VOICE_PROFILES.patient_male;
+      }
 
+      if (onlyPatient && line.speaker !== 'patient') {
+        console.log(`  [${i + 1}/${scenario.lines.length}] Skipping agent line (only-patient mode: keeping existing file)`);
+        manifest[scenario.id].push({
+          index: i,
+          speaker: line.speaker,
+          audioUrl: publicPath,
+          bytes: fs.existsSync(filePath) ? fs.statSync(filePath).size : 0,
+          model: 'eleven_v4',
+        });
+        continue;
+      }
+
+      const speechToSynthesize = line.speechText || line.text;
       console.log(`  [${i + 1}/${scenario.lines.length}] ${profile.name} (${profile.settings.speed}x): "${speechToSynthesize.slice(0, 50)}..."`);
 
       try {
         const audioBuffer = await fetchTTS(speechToSynthesize, profile, 'eleven_v4');
         fs.writeFileSync(filePath, audioBuffer);
-        console.log(`     ✓ Saved ${filePath} (${audioBuffer.length} bytes)`);
+        console.log(`     ✓ Saved ${filePath} (${audioBuffer.length} bytes) using voice ${profile.voiceId}`);
 
         manifest[scenario.id].push({
           index: i,
           speaker: line.speaker,
+          voiceId: profile.voiceId,
           audioUrl: publicPath,
           bytes: audioBuffer.length,
           model: 'eleven_v4',

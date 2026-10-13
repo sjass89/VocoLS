@@ -10,7 +10,8 @@ export const estimateLine = (line) =>
 export const estimateScript = (lines) => lines.reduce((sum, l) => sum + estimateLine(l), 0);
 
 const AGENT_PREFS = ['Samantha', 'Google US English', 'Microsoft Aria', 'Microsoft Jenny', 'Microsoft Zira', 'Karen', 'Serena'];
-const PATIENT_PREFS = ['Daniel', 'Google UK English Male', 'Microsoft Guy', 'Microsoft David', 'Alex', 'Fred', 'Tom'];
+const PATIENT_MALE_PREFS = ['Daniel', 'Google UK English Male', 'Microsoft Guy', 'Microsoft David', 'Alex', 'Fred', 'Tom'];
+const PATIENT_FEMALE_PREFS = ['Victoria', 'Google UK English Female', 'Microsoft Zira', 'Karen', 'Samantha', 'Serena', 'Microsoft Jenny'];
 
 function pickVoice(voices, prefs, exclude) {
   const en = voices.filter((v) => v.lang?.toLowerCase().startsWith('en'));
@@ -178,11 +179,12 @@ export function useCallPlayback() {
 
           const u = new SpeechSynthesisUtterance(line.text);
           const agentVoice = pickVoice(voices.current, AGENT_PREFS);
-          const voice = line.speaker === 'agent' ? agentVoice : pickVoice(voices.current, PATIENT_PREFS, agentVoice);
+          const patientPrefs = line.gender === 'female' ? PATIENT_FEMALE_PREFS : PATIENT_MALE_PREFS;
+          const voice = line.speaker === 'agent' ? agentVoice : pickVoice(voices.current, patientPrefs, agentVoice);
           if (voice) u.voice = voice;
           u.lang = voice?.lang || 'en-US';
           u.rate = line.speaker === 'agent' ? 1.04 : 1;
-          u.pitch = line.speaker === 'agent' ? 1.08 : 0.88;
+          u.pitch = line.speaker === 'agent' ? 1.08 : (line.gender === 'female' ? 1.05 : 0.88);
           u.onend = next;
           u.onerror = next;
           timer.current = setTimeout(next, durations[i] * 2.6 + 1500);

@@ -89,7 +89,7 @@ export default function AudioPlayground({ autoplayToken }) {
               );
             })}
             <p className="px-1 pt-2 text-xs leading-relaxed text-silver/60">
-              Conversational audio powered by ElevenLabs neural voices (Lucy as Ava, Josh as Patient). Patient data is fictional.
+              Conversational audio powered by ElevenLabs neural voices (Lucy as Ava, Cassidy &amp; Josh as Patients). Patient data is fictional.
             </p>
           </Reveal>
 
