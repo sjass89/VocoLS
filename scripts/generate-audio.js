@@ -105,7 +105,7 @@ const SCENARIOS = [
       {
         speaker: 'agent',
         text: 'Hi James, this is Ava from Riverside Health Pharmacy with your monthly check-in. Is now a good time?',
-        speechText: 'Hi James, this is Ava from Riverside Health Pharmacy with your monthly check-in. Is now a good time?',
+        speechText: 'Hi James! This is Ava from Riverside Health Pharmacy with your monthly check-in. Is now a good time?',
       },
       {
         speaker: 'patient',
@@ -143,7 +143,7 @@ const SCENARIOS = [
         speaker: 'agent',
         text: 'Hello Maria, this is Ava from Apex Specialty Pharmacy. Your next Humira shipment is ready to schedule. First, have you had any new infections, fevers, or hospital visits since your last dose?',
         // hyoo-MEER-uh for Humira
-        speechText: 'Hello Maria, this is Ava from Apex Specialty Pharmacy. Your next hyoo-MEER-uh shipment is ready to schedule. First, have you had any new infections, fevers, or hospital visits since your last dose?',
+        speechText: 'Hello Maria! This is Ava from Apex Specialty Pharmacy. Your next hyoo-MEER-uh shipment is ready to schedule. First, have you had any new infections, fevers, or hospital visits since your last dose?',
       },
       {
         speaker: 'patient',
@@ -153,7 +153,7 @@ const SCENARIOS = [
       {
         speaker: 'agent',
         text: 'Wonderful. It ships cold-chain and needs a signature. Can someone be home this Wednesday between ten and two?',
-        speechText: 'Wonderful. It ships cold-chain and needs a signature. Can someone be home this Wednesday between ten and two?',
+        speechText: 'Wonderful! It ships cold-chain and needs a signature. Can someone be home this Wednesday between ten and two?',
       },
       {
         speaker: 'patient',
@@ -163,7 +163,7 @@ const SCENARIOS = [
       {
         speaker: 'agent',
         text: 'Perfect. Your delivery is confirmed for Wednesday, with a twenty-five dollar copay on file. You will get a tracking text this evening.',
-        speechText: 'Perfect. Your delivery is confirmed for Wednesday, with a twenty-five dollar co-pay on file. You will get a tracking text this evening.',
+        speechText: 'Perfect! Your delivery is confirmed for Wednesday, with a twenty-five dollar co-pay on file. You will get a tracking text this evening.',
       },
     ],
   },
@@ -175,7 +175,7 @@ const SCENARIOS = [
         speaker: 'agent',
         text: 'Hi Robert, this is Ava from Main Street Pharmacy. Your warfarin refill is ready for pickup today.',
         // WAR-fer-in for Warfarin
-        speechText: 'Hi Robert, this is Ava from Main Street Pharmacy. Your WAR-fer-in refill is ready for pickup today.',
+        speechText: 'Hi Robert! This is Ava from Main Street Pharmacy. Your WAR-fer-in refill is ready for pickup today.',
       },
       {
         speaker: 'patient',

@@ -4,7 +4,7 @@
       "index": 0,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/medsync/line-0.mp3",
-      "bytes": 139224,
+      "bytes": 142986,
       "model": "eleven_v4"
     },
     {
@@ -18,28 +18,28 @@
       "index": 2,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/medsync/line-2.mp3",
-      "bytes": 182692,
+      "bytes": 181438,
       "model": "eleven_v4"
     },
     {
       "index": 3,
       "speaker": "patient",
       "audioUrl": "/audio/scenarios/medsync/line-3.mp3",
-      "bytes": 65245,
+      "bytes": 63991,
       "model": "eleven_v4"
     },
     {
       "index": 4,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/medsync/line-4.mp3",
-      "bytes": 130447,
+      "bytes": 131701,
       "model": "eleven_v4"
     },
     {
       "index": 5,
       "speaker": "patient",
       "audioUrl": "/audio/scenarios/medsync/line-5.mp3",
-      "bytes": 39332,
+      "bytes": 40586,
       "model": "eleven_v4"
     }
   ],
@@ -48,37 +48,43 @@
       "index": 0,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/chronic/line-0.mp3",
-      "bytes": 105787
+      "bytes": 95756,
+      "model": "eleven_v4"
     },
     {
       "index": 1,
       "speaker": "patient",
       "audioUrl": "/audio/scenarios/chronic/line-1.mp3",
-      "bytes": 20942
+      "bytes": 25539,
+      "model": "eleven_v4"
     },
     {
       "index": 2,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/chronic/line-2.mp3",
-      "bytes": 108713
+      "bytes": 131701,
+      "model": "eleven_v4"
     },
     {
       "index": 3,
       "speaker": "patient",
       "audioUrl": "/audio/scenarios/chronic/line-3.mp3",
-      "bytes": 49363
+      "bytes": 70261,
+      "model": "eleven_v4"
     },
     {
       "index": 4,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/chronic/line-4.mp3",
-      "bytes": 183946
+      "bytes": 189379,
+      "model": "eleven_v4"
     },
     {
       "index": 5,
       "speaker": "patient",
       "audioUrl": "/audio/scenarios/chronic/line-5.mp3",
-      "bytes": 30137
+      "bytes": 41839,
+      "model": "eleven_v4"
     }
   ],
   "specialty": [
@@ -86,31 +92,36 @@
       "index": 0,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/specialty/line-0.mp3",
-      "bytes": 202336
+      "bytes": 199410,
+      "model": "eleven_v4"
     },
     {
       "index": 1,
       "speaker": "patient",
       "audioUrl": "/audio/scenarios/specialty/line-1.mp3",
-      "bytes": 38078
+      "bytes": 49781,
+      "model": "eleven_v4"
     },
     {
       "index": 2,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/specialty/line-2.mp3",
-      "bytes": 104951
+      "bytes": 109967,
+      "model": "eleven_v4"
     },
     {
       "index": 3,
       "speaker": "patient",
       "audioUrl": "/audio/scenarios/specialty/line-3.mp3",
-      "bytes": 30973
+      "bytes": 38078,
+      "model": "eleven_v4"
     },
     {
       "index": 4,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/specialty/line-4.mp3",
-      "bytes": 113311
+      "bytes": 126685,
+      "model": "eleven_v4"
     }
   ],
   "escalation": [
@@ -118,19 +129,22 @@
       "index": 0,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/escalation/line-0.mp3",
-      "bytes": 114564
+      "bytes": 100772,
+      "model": "eleven_v4"
     },
     {
       "index": 1,
       "speaker": "patient",
       "audioUrl": "/audio/scenarios/escalation/line-1.mp3",
-      "bytes": 90323
+      "bytes": 107459,
+      "model": "eleven_v4"
     },
     {
       "index": 2,
       "speaker": "agent",
       "audioUrl": "/audio/scenarios/escalation/line-2.mp3",
-      "bytes": 146747
+      "bytes": 157196,
+      "model": "eleven_v4"
     }
   ]
 }
