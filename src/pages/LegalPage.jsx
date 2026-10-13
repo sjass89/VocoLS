@@ -121,14 +121,14 @@ export default function LegalPage({ currentDocId = 'privacy', onSelectDoc, onBac
                     <button
                       key={key}
                       onClick={() => handleSelect(key)}
-                      className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition ${
+                      className={`flex w-full items-center gap-3 overflow-hidden rounded-xl px-3 py-2.5 text-left text-sm transition ${
                         isActive
                           ? 'border border-brand-cyan/30 bg-brand-cyan/10 font-medium text-brand-cyan'
                           : 'text-silver hover:bg-white/5 hover:text-white'
                       }`}
                     >
                       <Icon className="h-4 w-4 shrink-0" />
-                      <span>{item.title}</span>
+                      <span className="truncate min-w-0">{item.title}</span>
                     </button>
                   );
                 })}
@@ -154,7 +154,7 @@ export default function LegalPage({ currentDocId = 'privacy', onSelectDoc, onBac
             </span>
           </div>
 
-          <h1 className="mt-5 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h1 className="mt-5 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl break-words">
             {doc.title}
           </h1>
 
@@ -200,22 +200,22 @@ export default function LegalPage({ currentDocId = 'privacy', onSelectDoc, onBac
                       <button
                         key={key}
                         onClick={() => handleSelect(key)}
-                        className={`group flex items-center justify-between rounded-xl px-3.5 py-3 text-left text-sm transition-all ${
+                        className={`group flex w-full items-center justify-between gap-2 overflow-hidden rounded-xl px-3.5 py-3 text-left text-sm transition-all ${
                           isActive
                             ? 'border border-brand-cyan/40 bg-brand-cyan/[0.12] font-semibold text-white shadow-[0_0_15px_rgba(0,229,255,0.15)]'
                             : 'border border-transparent text-silver hover:border-white/10 hover:bg-white/[0.04] hover:text-white'
                         }`}
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex min-w-0 flex-1 items-center gap-3">
                           <Icon
-                            className={`h-4 w-4 transition-colors ${
+                            className={`h-4 w-4 shrink-0 transition-colors ${
                               isActive ? 'text-brand-cyan' : 'text-silver/50 group-hover:text-brand-cyan'
                             }`}
                           />
                           <span className="truncate">{item.title}</span>
                         </div>
                         {isActive && (
-                          <ChevronRight className="h-4 w-4 text-brand-cyan" />
+                          <ChevronRight className="h-4 w-4 shrink-0 text-brand-cyan" />
                         )}
                       </button>
                     );

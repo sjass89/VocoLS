@@ -160,7 +160,7 @@ Customer agrees to indemnify and hold harmless VitalGuard LLC, its officers, dir
   hipaa: {
     id: 'hipaa',
     slug: 'hipaa-baa',
-    title: 'HIPAA & Business Associate Agreement (BAA)',
+    title: 'HIPAA & BAA',
     category: 'Regulatory & Compliance',
     icon: ShieldAlert,
     lastUpdated: 'October 13, 2026',
