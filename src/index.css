@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-midnight: #0b1021;
+  --color-abyss: #050a15;
+  --color-brand-cyan: #00e5ff;
+  --color-brand-teal: #1de9b6;
+  --color-silver: #a1aab3;
+  --color-slate-card: #111827;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", "Inter", ui-sans-serif, sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+  }
+  body {
+    @apply bg-abyss text-silver font-sans antialiased;
+    background-image: linear-gradient(180deg, #0b1021 0%, #050a15 55%, #050a15 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  ::selection {
+    background: rgba(0, 229, 255, 0.3);
+    color: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- Utilities ---------- */
+@utility glass {
+  background: rgba(17, 24, 39, 0.55);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(0, 229, 255, 0.15);
+}
+
+@utility text-brand-gradient {
+  background-image: linear-gradient(90deg, #1de9b6, #00e5ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* ---------- Cursor spotlight card ---------- */
+.spotlight {
+  --mx: -1000px;
+  --my: -1000px;
+  position: relative;
+  isolation: isolate;
+  border-radius: 1.25rem;
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+/* 1px border: static brand border + mouse-tracking cyan glow */
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background:
+    radial-gradient(360px circle at var(--mx) var(--my), rgba(0, 229, 255, 0.9), rgba(29, 233, 182, 0.35) 30%, transparent 60%),
+    linear-gradient(rgba(0, 229, 255, 0.15), rgba(0, 229, 255, 0.15));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+/* inner surface glow */
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(520px circle at var(--mx) var(--my), rgba(0, 229, 255, 0.09), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.spotlight:hover::after { opacity: 1; }
+
+/* ---------- Range sliders ---------- */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1de9b6, #00e5ff) 0 / var(--val, 50%) 100% no-repeat, rgba(161, 170, 179, 0.15);
+  outline: none;
+  cursor: pointer;
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #00e5ff;
+  box-shadow: 0 0 0 4px rgba(0, 229, 255, 0.15), 0 0 18px rgba(0, 229, 255, 0.6);
+  transition: transform 0.15s ease;
+}
+.range::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #00e5ff;
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.6);
+}
+
+/* Thin scrollbars for transcript panes */
+.thin-scroll::-webkit-scrollbar { width: 6px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.2); border-radius: 999px; }

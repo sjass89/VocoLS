@@ -1,0 +1,73 @@
+import { CalendarCheck, HeartPulse, PackageCheck, Stethoscope } from 'lucide-react';
+
+/** Mock call scenarios for the audio playground. Patient data is fictional. */
+export const SCENARIOS = [
+  {
+    id: 'medsync',
+    title: 'MedSync Batch Call',
+    subtitle: 'Aligns 3 maintenance Rx to one pickup date',
+    icon: CalendarCheck,
+    pharmacy: 'Main St Pharmacy',
+    patient: 'Sarah M.',
+    outcomes: ['Identity verified', '3 Rx synchronized', 'Pickup 10/24 · 5:30 PM', 'PMS write-back'],
+    lines: [
+      { speaker: 'agent', text: 'Hi Sarah, this is Ava calling from Main Street Pharmacy to confirm your thirty-day refill. For your privacy, can you confirm your date of birth?' },
+      { speaker: 'patient', text: 'Sure, it is March fourteenth, nineteen sixty-two.' },
+      { speaker: 'agent', text: 'Thank you. Your lisinopril and atorvastatin are both due. I can also sync your metformin so all three are ready on Thursday, October twenty-fourth. Does that work?' },
+      { speaker: 'patient', text: 'Oh, that would be so much easier. Can I pick up after five?' },
+      { speaker: 'agent', text: 'Absolutely. Pickup is set for five thirty on Thursday, and I just texted you a confirmation. Anything else I can help with?' },
+      { speaker: 'patient', text: 'No, that is everything. Thank you!' },
+      { speaker: 'system', text: 'PMS updated · 3 prescriptions synchronized · Pickup 10/24 5:30 PM · SMS sent' },
+    ],
+  },
+  {
+    id: 'chronic',
+    title: 'Chronic Care Check-in',
+    subtitle: 'Adherence check for a diabetes population',
+    icon: HeartPulse,
+    pharmacy: 'Riverside Health Pharmacy',
+    patient: 'James R.',
+    outcomes: ['Adherence gap detected', 'Barrier: cost', 'Copay card applied', 'Pharmacist flagged'],
+    lines: [
+      { speaker: 'agent', text: 'Hi James, this is Ava from Riverside Health Pharmacy with your monthly check-in. Is now a good time?' },
+      { speaker: 'patient', text: 'Yeah, I have a minute.' },
+      { speaker: 'agent', text: 'Great. Our records show your Jardiance refill is about ten days overdue. Have you been able to take it as prescribed?' },
+      { speaker: 'patient', text: 'Honestly, I have been stretching it out. It got expensive this year.' },
+      { speaker: 'agent', text: 'I understand, and thank you for telling me. You may qualify for a manufacturer copay card that could lower your cost significantly. Would you like me to apply it and have your pharmacist follow up?' },
+      { speaker: 'patient', text: 'Yes, please. That would really help.' },
+      { speaker: 'system', text: 'Adherence gap logged · Copay assistance applied · Pharmacist follow-up task created' },
+    ],
+  },
+  {
+    id: 'specialty',
+    title: 'Specialty Refill Confirmation',
+    subtitle: 'Cold-chain delivery + clinical assessment',
+    icon: PackageCheck,
+    pharmacy: 'Apex Specialty Rx',
+    patient: 'Maria L.',
+    outcomes: ['Clinical screen passed', 'Cold-chain delivery', 'Signature required', 'Shipment queued'],
+    lines: [
+      { speaker: 'agent', text: 'Hello Maria, this is Ava from Apex Specialty Pharmacy. Your next Humira shipment is ready to schedule. First, have you had any new infections, fevers, or hospital visits since your last dose?' },
+      { speaker: 'patient', text: 'No, nothing like that. I have been feeling good.' },
+      { speaker: 'agent', text: 'Wonderful. It ships cold-chain and needs a signature. Can someone be home this Wednesday between ten and two?' },
+      { speaker: 'patient', text: 'Wednesday works. I work from home.' },
+      { speaker: 'agent', text: 'Perfect. Your delivery is confirmed for Wednesday, with a twenty-five dollar copay on file. You will get a tracking text this evening.' },
+      { speaker: 'system', text: 'Clinical screen documented · Cold-chain shipment queued · Tracking SMS scheduled' },
+    ],
+  },
+  {
+    id: 'escalation',
+    title: 'Clinical Escalation Triage',
+    subtitle: 'Warm transfer to the on-duty pharmacist',
+    icon: Stethoscope,
+    pharmacy: 'Main St Pharmacy',
+    patient: 'Robert K.',
+    outcomes: ['Clinical intent detected', 'Context summarized', 'Warm transfer < 8s', 'Audit log created'],
+    lines: [
+      { speaker: 'agent', text: 'Hi Robert, this is Ava from Main Street Pharmacy. Your warfarin refill is ready for pickup today.' },
+      { speaker: 'patient', text: 'Thanks. Quick question though, my dentist just prescribed me ibuprofen. Is that okay to take with it?' },
+      { speaker: 'agent', text: 'That is an important question, and our pharmacist should answer it directly. I am transferring you now and sharing a summary so you will not need to repeat yourself.' },
+      { speaker: 'system', text: 'Escalation: potential drug interaction (warfarin + NSAID) · Warm transfer to PharmD on duty · Summary attached' },
+    ],
+  },
+];
