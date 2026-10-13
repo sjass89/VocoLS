@@ -117,5 +117,33 @@ const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 206
 </svg>
 `;
 
+// Clean version without the crossbar
+const svgCleanContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 206" width="100%" height="100%">
+  <defs>
+    <!-- Brand Cyan Gradient for Voco -->
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1DE9B6" />
+      <stop offset="50%" stop-color="#00E5FF" />
+      <stop offset="100%" stop-color="#00B0FF" />
+    </linearGradient>
+  </defs>
+
+  <g id="vocorx-logo-clean">
+    <!-- Voco (Pure Vector Path) -->
+    <path d="${pathVoco.toPathData(2)}" fill="url(#brandGrad)" />
+
+    <!-- R (Pure Vector Path) -->
+    <path d="${pathR.toPathData(2)}" fill="#FFFFFF" />
+
+    <!-- x (Pure Vector Path, clean without crossbar) -->
+    <path d="${pathX.toPathData(2)}" fill="#FFFFFF" />
+
+    <!-- Tagline: VOICE AI FOR PHARMACIES (Pure Vector Path) -->
+    <path d="${tagPathsOffset.join(' ')}" fill="#A1B0C2" />
+  </g>
+</svg>
+`;
+
 fs.writeFileSync(path.resolve(__dirname, '../public/vocorx-logo.svg'), svgContent.trim());
-console.log('Saved public/vocorx-logo.svg successfully!');
+fs.writeFileSync(path.resolve(__dirname, '../public/vocorx-logo-clean.svg'), svgCleanContent.trim());
+console.log('Saved public/vocorx-logo.svg and public/vocorx-logo-clean.svg successfully!');
