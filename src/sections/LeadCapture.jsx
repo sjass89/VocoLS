@@ -24,7 +24,7 @@ function Field({ icon: Icon, label, error, children }) {
   );
 }
 
-export default function LeadCapture() {
+export default function LeadCapture({ onOpenLegal }) {
   const [form, setForm] = useState({ name: '', pharmacy: '', locations: '', email: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | loading | success
@@ -141,7 +141,20 @@ export default function LeadCapture() {
                         {status === 'loading' ? 'Booking…' : 'Book Pilot'}
                       </Button>
                       <p className="text-center text-xs text-silver/60">
-                        By submitting, you agree to our <a href="#" className="text-silver underline-offset-2 hover:text-white hover:underline">Privacy Policy</a>. We never sell your data.
+                        By submitting, you agree to our{' '}
+                        <a
+                          href="#privacy"
+                          onClick={(e) => {
+                            if (onOpenLegal) {
+                              e.preventDefault();
+                              onOpenLegal('privacy');
+                            }
+                          }}
+                          className="text-silver underline-offset-2 hover:text-white hover:underline cursor-pointer"
+                        >
+                          Privacy Policy
+                        </a>
+                        . We never sell your data.
                       </p>
                     </motion.form>
                   )}

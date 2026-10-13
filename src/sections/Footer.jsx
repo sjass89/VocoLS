@@ -2,32 +2,43 @@ import { ArrowUpRight, ShieldCheck } from 'lucide-react';
 import Logo from '../components/Logo';
 import { NAV } from './Header';
 
-const COLUMNS = [
-  { title: 'Platform', links: NAV.map((n) => ({ label: n.label, href: n.href })) },
-  {
-    title: 'Enterprise',
-    links: [
-      { label: 'Book Enterprise Demo', href: '#book' },
-      { label: 'Audio Playground', href: '#demo' },
-      { label: 'Integrations', href: '#medsync' },
-      { label: 'Partner Program', href: '#' },
-      { label: 'Contact Sales', href: 'mailto:sales@vocorx.ai' },
-    ],
-  },
-  {
-    title: 'Trust & Legal',
-    links: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Service', href: '#' },
-      { label: 'HIPAA & BAA', href: '#security' },
-      { label: 'Security Overview', href: '#security' },
-      { label: 'Accessibility', href: '#' },
-    ],
-  },
-];
-
-export default function Footer() {
+export default function Footer({ onOpenLegal }) {
   const year = new Date().getFullYear();
+
+  const handleLegalClick = (docKey, e) => {
+    if (onOpenLegal) {
+      e.preventDefault();
+      onOpenLegal(docKey);
+    }
+  };
+
+  const columns = [
+    {
+      title: 'Platform',
+      links: NAV.map((n) => ({ label: n.label, href: n.href, isLegal: false })),
+    },
+    {
+      title: 'Enterprise',
+      links: [
+        { label: 'Book Enterprise Demo', href: '#book', isLegal: false },
+        { label: 'Audio Playground', href: '#demo', isLegal: false },
+        { label: 'Integrations', href: '#medsync', isLegal: false },
+        { label: 'Partner Program', href: '#book', isLegal: false },
+        { label: 'Contact Sales', href: 'mailto:sales@vocorx.ai', isLegal: false },
+      ],
+    },
+    {
+      title: 'Trust & Legal',
+      links: [
+        { label: 'Privacy Policy', href: '#privacy', isLegal: true, docKey: 'privacy' },
+        { label: 'Terms of Service', href: '#terms', isLegal: true, docKey: 'terms' },
+        { label: 'HIPAA & BAA', href: '#hipaa-baa', isLegal: true, docKey: 'hipaa' },
+        { label: 'Security Overview', href: '#security-overview', isLegal: true, docKey: 'security' },
+        { label: 'Accessibility', href: '#accessibility', isLegal: true, docKey: 'accessibility' },
+      ],
+    },
+  ];
+
   return (
     <footer className="relative border-t border-brand-cyan/10 bg-abyss/80 backdrop-blur">
       <div className="mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-6">
@@ -42,16 +53,30 @@ export default function Footer() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-            {COLUMNS.map((col) => (
+            {columns.map((col) => (
               <div key={col.title}>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white">{col.title}</p>
                 <ul className="mt-4 space-y-2.5">
                   {col.links.map((l) => (
                     <li key={l.label}>
-                      <a href={l.href} className="group inline-flex items-center gap-1 text-sm text-silver transition-colors hover:text-brand-cyan">
-                        {l.label}
-                        <ArrowUpRight className="h-3 w-3 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
-                      </a>
+                      {l.isLegal ? (
+                        <a
+                          href={l.href}
+                          onClick={(e) => handleLegalClick(l.docKey, e)}
+                          className="group inline-flex items-center gap-1 text-sm text-silver transition-colors hover:text-brand-cyan cursor-pointer"
+                        >
+                          {l.label}
+                          <ArrowUpRight className="h-3 w-3 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                        </a>
+                      ) : (
+                        <a
+                          href={l.href}
+                          className="group inline-flex items-center gap-1 text-sm text-silver transition-colors hover:text-brand-cyan"
+                        >
+                          {l.label}
+                          <ArrowUpRight className="h-3 w-3 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -69,9 +94,27 @@ export default function Footer() {
           <div className="mt-6 flex flex-col justify-between gap-3 sm:flex-row">
             <p>© {year} VitalGuard LLC. All rights reserved.</p>
             <div className="flex gap-5">
-              <a href="#" className="hover:text-white">Privacy Policy</a>
-              <a href="#" className="hover:text-white">Terms</a>
-              <a href="#" className="hover:text-white">Cookie Settings</a>
+              <a
+                href="#privacy"
+                onClick={(e) => handleLegalClick('privacy', e)}
+                className="hover:text-white cursor-pointer transition"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#terms"
+                onClick={(e) => handleLegalClick('terms', e)}
+                className="hover:text-white cursor-pointer transition"
+              >
+                Terms
+              </a>
+              <a
+                href="#cookie-settings"
+                onClick={(e) => handleLegalClick('cookies', e)}
+                className="hover:text-white cursor-pointer transition"
+              >
+                Cookie Settings
+              </a>
             </div>
           </div>
         </div>
