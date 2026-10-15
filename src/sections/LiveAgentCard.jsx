@@ -6,11 +6,11 @@ import Waveform from '../components/Waveform';
 import { LiveDot } from '../components/ui';
 
 const SCRIPT = [
-  { speaker: 'agent', text: 'Arthur? Hi, it’s Ava with your 30-second policy check-in—nothing is wrong! Are you still at 418 Oakwood Drive?' },
-  { speaker: 'patient', text: 'Yes—still at 418 Oakwood Drive in Sarasota.' },
-  { speaker: 'agent', text: 'Thanks! Have you had any hospital stays or seen any new specialists since July?' },
-  { speaker: 'patient', text: 'I spent two nights at Sarasota Memorial last month and saw a cardiologist.' },
-  { speaker: 'agent', text: 'Glad you’re home safe. What was the cardiologist’s name, what diagnosis did they share, and did they start any new medications?' },
+  { speaker: 'agent', text: 'Hi Arthur, this is Ava calling for your quarterly policy update. Are you still living at 418 Oakwood Drive?' },
+  { speaker: 'patient', text: 'Yes, I am still at 418 Oakwood Drive in Sarasota.' },
+  { speaker: 'agent', text: 'Thank you. Have you had any hospital visits or seen any new doctors since July?' },
+  { speaker: 'patient', text: 'Yeah, I spent two nights at Sarasota Memorial last month and saw a cardiologist.' },
+  { speaker: 'agent', text: 'I am glad you are back home and doing better. What was the cardiologist’s name, what did they say caused it, and did they start any new medications?' },
   { speaker: 'system', text: 'Attempt #7 Reached · Hospitalization + Dr. Patel (Cardiology) logged · APS flagged' },
 ];
 

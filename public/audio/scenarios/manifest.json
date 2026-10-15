@@ -5,15 +5,15 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-persistence/line-0.mp3",
-      "bytes": 127938,
+      "bytes": 102025,
       "model": "eleven_v4"
     },
     {
       "index": 1,
       "speaker": "patient",
-      "voiceId": "lnnkVRtB3hSBA22O4kcA",
+      "voiceId": "PXMcl9zGUnc9w7DofLWk",
       "audioUrl": "/audio/scenarios/ls-persistence/line-1.mp3",
-      "bytes": 106204,
+      "bytes": 93247,
       "model": "eleven_v4"
     },
     {
@@ -21,15 +21,15 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-persistence/line-2.mp3",
-      "bytes": 137969,
+      "bytes": 125430,
       "model": "eleven_v4"
     },
     {
       "index": 3,
       "speaker": "patient",
-      "voiceId": "lnnkVRtB3hSBA22O4kcA",
+      "voiceId": "PXMcl9zGUnc9w7DofLWk",
       "audioUrl": "/audio/scenarios/ls-persistence/line-3.mp3",
-      "bytes": 86978,
+      "bytes": 100771,
       "model": "eleven_v4"
     },
     {
@@ -37,15 +37,15 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-persistence/line-4.mp3",
-      "bytes": 102025,
+      "bytes": 121251,
       "model": "eleven_v4"
     },
     {
       "index": 5,
       "speaker": "patient",
-      "voiceId": "lnnkVRtB3hSBA22O4kcA",
+      "voiceId": "PXMcl9zGUnc9w7DofLWk",
       "audioUrl": "/audio/scenarios/ls-persistence/line-5.mp3",
-      "bytes": 82798,
+      "bytes": 79037,
       "model": "eleven_v4"
     }
   ],
@@ -55,7 +55,7 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-followup/line-0.mp3",
-      "bytes": 136715,
+      "bytes": 135461,
       "model": "eleven_v4"
     },
     {
@@ -71,7 +71,7 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-followup/line-2.mp3",
-      "bytes": 95755,
+      "bytes": 109966,
       "model": "eleven_v4"
     },
     {
@@ -87,7 +87,7 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-followup/line-4.mp3",
-      "bytes": 95755,
+      "bytes": 112474,
       "model": "eleven_v4"
     },
     {
@@ -95,7 +95,7 @@
       "speaker": "patient",
       "voiceId": "PXMcl9zGUnc9w7DofLWk",
       "audioUrl": "/audio/scenarios/ls-followup/line-5.mp3",
-      "bytes": 95755,
+      "bytes": 100771,
       "model": "eleven_v4"
     }
   ],
@@ -105,15 +105,15 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-cascade/line-0.mp3",
-      "bytes": 135461,
+      "bytes": 148418,
       "model": "eleven_v4"
     },
     {
       "index": 1,
       "speaker": "patient",
-      "voiceId": "lnnkVRtB3hSBA22O4kcA",
+      "voiceId": "PXMcl9zGUnc9w7DofLWk",
       "audioUrl": "/audio/scenarios/ls-cascade/line-1.mp3",
-      "bytes": 102025,
+      "bytes": 93247,
       "model": "eleven_v4"
     },
     {
@@ -121,15 +121,15 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-cascade/line-2.mp3",
-      "bytes": 103278,
+      "bytes": 109966,
       "model": "eleven_v4"
     },
     {
       "index": 3,
       "speaker": "patient",
-      "voiceId": "lnnkVRtB3hSBA22O4kcA",
+      "voiceId": "PXMcl9zGUnc9w7DofLWk",
       "audioUrl": "/audio/scenarios/ls-cascade/line-3.mp3",
-      "bytes": 97009,
+      "bytes": 102025,
       "model": "eleven_v4"
     },
     {
@@ -137,7 +137,7 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-cascade/line-4.mp3",
-      "bytes": 82798,
+      "bytes": 104950,
       "model": "eleven_v4"
     }
   ],
@@ -147,7 +147,7 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-escalation/line-0.mp3",
-      "bytes": 102025,
+      "bytes": 107458,
       "model": "eleven_v4"
     },
     {
@@ -155,7 +155,7 @@
       "speaker": "patient",
       "voiceId": "PXMcl9zGUnc9w7DofLWk",
       "audioUrl": "/audio/scenarios/ls-escalation/line-1.mp3",
-      "bytes": 89486,
+      "bytes": 103278,
       "model": "eleven_v4"
     },
     {
@@ -163,7 +163,7 @@
       "speaker": "agent",
       "voiceId": "OYq3gdwlWVVaI8ECjSk1",
       "audioUrl": "/audio/scenarios/ls-escalation/line-2.mp3",
-      "bytes": 160957,
+      "bytes": 153434,
       "model": "eleven_v4"
     }
   ]

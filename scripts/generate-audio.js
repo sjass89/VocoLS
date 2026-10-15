@@ -29,171 +29,157 @@ loadEnv();
 // API Key (from env or CLI argument)
 const API_KEY = process.env.ELEVENLABS_API_KEY || process.argv[2];
 
-// Strictly only the 3 approved voice IDs
+// Strictly only the 2 approved voice IDs (Female Agent + Male Insured/Contact)
 export const VOICES = {
   female_agent: 'OYq3gdwlWVVaI8ECjSk1', // Briseida - Clear, Warm (Ava Tracking Agent)
   male_insured: 'PXMcl9zGUnc9w7DofLWk', // Mark Vale - Male Insured / Contact
-  female_insured: 'lnnkVRtB3hSBA22O4kcA', // Lina - Female Insured / Contact
 };
 
-// Voice settings for natural conversational pace, immediate 3-second hook, and clarity
+// Voice settings tuned for smooth, natural, conversational cadence with zero exclamation-point spikes
 const VOICE_PROFILES = {
   agent: {
     voiceId: VOICES.female_agent,
     name: 'Briseida (Ava Agent - OYq3gdwlWVVaI8ECjSk1)',
     settings: {
-      stability: 0.45,
-      similarity_boost: 0.82,
-      speed: 1.12, // Crisp, warm, natural pace that hooks the listener immediately
+      stability: 0.55,
+      similarity_boost: 0.80,
+      speed: 1.08,
     },
   },
-  patient_male: {
+  patient: {
     voiceId: VOICES.male_insured,
     name: 'Mark Vale (Male Insured/Contact - PXMcl9zGUnc9w7DofLWk)',
     settings: {
-      stability: 0.50,
+      stability: 0.55,
       similarity_boost: 0.80,
-      speed: 1.06,
-    },
-  },
-  patient_female: {
-    voiceId: VOICES.female_insured,
-    name: 'Lina (Female Insured/Contact - lnnkVRtB3hSBA22O4kcA)',
-    settings: {
-      stability: 0.50,
-      similarity_boost: 0.80,
-      speed: 1.06,
+      speed: 1.05,
     },
   },
 };
 
-// Scenarios with 3-second anti-hangup hooks & concise follow-up questions for ElevenLabs V4
+// Smooth, natural scripts that roll off the tongue — no exclamation points, woman agent + man insured/contact every time
 const SCENARIOS = [
   {
     id: 'ls-persistence',
     title: 'Persistent Quarterly Check-In (Attempt #7)',
-    patientGender: 'female', // Evelyn M.
     lines: [
       {
         speaker: 'agent',
-        text: 'Evelyn? Hi, it’s Ava with your 30-second policy check-in—nothing is wrong! Are you still at 214 Maple Avenue?',
-        speechText: 'Evelyn? Hi! It’s Ava with your thirty-second policy check-in—nothing is wrong! Are you still at two fourteen Maple Avenue?',
+        text: 'Hi Walter, this is Ava calling with a quick check-in on your policy. Are you still living on Maple Avenue?',
+        speechText: 'Hi Walter, this is Ava calling with a quick check-in on your policy. Are you still living on Maple Avenue?',
       },
       {
         speaker: 'patient',
-        text: 'Oh, hi Ava! Yes, sorry I missed your earlier calls. I am still at 214 Maple.',
-        speechText: 'Oh, hi Ava! Yes, sorry I missed your earlier calls. I am still at two fourteen Maple.',
+        text: 'Oh, hi Ava. Yes, sorry I missed your earlier calls, I am still at two fourteen Maple.',
+        speechText: 'Oh, hi Ava. Yes, sorry I missed your earlier calls, I am still at two fourteen Maple.',
       },
       {
         speaker: 'agent',
-        text: 'No problem at all! Just to verify for your file, can you confirm your birth date, and is Dr. Alan Miller still your primary doctor?',
-        speechText: 'No problem at all! Just to verify for your file, can you confirm your birth date, and is Doctor Alan Miller still your primary doctor?',
+        text: 'No problem at all. Just to keep your file current, could you confirm your date of birth, and are you still seeing Dr. Alan Miller?',
+        speechText: 'No problem at all. Just to keep your file current, could you confirm your date of birth, and are you still seeing Doctor Alan Miller?',
       },
       {
         speaker: 'patient',
-        text: 'March fourteenth, nineteen forty-eight. And yes, I still see Dr. Miller.',
-        speechText: 'March fourteenth, nineteen forty-eight. And yes, I still see Doctor Miller.',
+        text: 'It is March fourteenth, nineteen forty-eight, and yes, Dr. Miller is still my regular doctor.',
+        speechText: 'It is March fourteenth, nineteen forty-eight, and yes, Doctor Miller is still my regular doctor.',
       },
       {
         speaker: 'agent',
-        text: 'Any hospital stays in the last ninety days, and is your daughter Rachel still your best backup contact?',
-        speechText: 'Any hospital stays in the last ninety days, and is your daughter Rachel still your best backup contact?',
+        text: 'Thank you. Have you had any hospital stays in the last three months, and is your son Mark still your best backup contact?',
+        speechText: 'Thank you. Have you had any hospital stays in the last three months, and is your son Mark still your best backup contact?',
       },
       {
         speaker: 'patient',
-        text: 'No hospital visits, and yes, Rachel is still the best backup.',
-        speechText: 'No hospital visits, and yes, Rachel is still the best backup.',
+        text: 'No hospital visits at all, and yes, Mark is still the best backup.',
+        speechText: 'No hospital visits at all, and yes, Mark is still the best backup.',
       },
     ],
   },
   {
     id: 'ls-followup',
     title: 'Hospitalization & Dynamic Follow-Up Drill',
-    patientGender: 'male', // Arthur R.
     lines: [
       {
         speaker: 'agent',
-        text: 'Arthur? Hi, it’s Ava calling to keep your policy file active—it only takes 30 seconds. Have you had any hospital visits since July?',
-        speechText: 'Arthur? Hi! It’s Ava calling to keep your policy file active—it only takes thirty seconds. Have you had any hospital visits since July?',
+        text: 'Hi Arthur, this is Ava calling for your quarterly policy update. Have you had any hospital visits or seen any new doctors since July?',
+        speechText: 'Hi Arthur, this is Ava calling for your quarterly policy update. Have you had any hospital visits, or seen any new doctors since July?',
       },
       {
         speaker: 'patient',
-        text: 'Yeah, actually I was in the hospital for three days last month for shortness of breath.',
-        speechText: 'Yeah, actually I was in the hospital for three days last month for shortness of breath.',
+        text: 'Yeah, I actually spent three days in the hospital last month because I was short of breath.',
+        speechText: 'Yeah, I actually spent three days in the hospital last month because I was short of breath.',
       },
       {
         speaker: 'agent',
-        text: 'Glad you’re home safe, Arthur. Which hospital was that, and what diagnosis did the doctors give you?',
-        speechText: 'Glad you’re home safe, Arthur. Which hospital was that, and what diagnosis did the doctors give you?',
+        text: 'I am glad you are back home and doing better. Which hospital did you go to, and what did the doctors say caused it?',
+        speechText: 'I am glad you are back home and doing better. Which hospital did you go to, and what did the doctors say caused it?',
       },
       {
         speaker: 'patient',
-        text: 'Sarasota Memorial. They said it was mild atrial fibrillation.',
-        speechText: 'Sarasota Memorial. They said it was mild ay-tree-uhl fib-rih-LAY-shun.',
+        text: 'I went to Sarasota Memorial, and they told me it was mild atrial fibrillation.',
+        speechText: 'I went to Sarasota Memorial, and they told me it was mild atrial fibrillation.',
       },
       {
         speaker: 'agent',
-        text: 'Got it. Did they refer you to a new cardiologist or start any new daily medications?',
-        speechText: 'Got it. Did they refer you to a new cardiologist, or start any new daily medications?',
+        text: 'Thank you for sharing that. Did they set you up with a new cardiologist, or put you on any new daily medications?',
+        speechText: 'Thank you for sharing that. Did they set you up with a new cardiologist, or put you on any new daily medications?',
       },
       {
         speaker: 'patient',
-        text: 'Yes, Dr. Sanjay Patel at Gulf Coast Cardiology, and he put me on Eliquis.',
-        speechText: 'Yes, Doctor Sanjay Patel at Gulf Coast Cardiology, and he put me on EL-ih-kwiss.',
+        text: 'Yes, I am seeing Dr. Sanjay Patel at Gulf Coast Cardiology now, and he started me on Eliquis.',
+        speechText: 'Yes, I am seeing Doctor Sanjay Patel at Gulf Coast Cardiology now, and he started me on Eliquis.',
       },
     ],
   },
   {
     id: 'ls-cascade',
     title: 'Designated Contact Cascade Outreach',
-    patientGender: 'female', // Claire L.
     lines: [
       {
         speaker: 'agent',
-        text: 'Claire? Hi, it’s Ava—you’re listed as the backup contact for your dad, Walter, and we missed him at home. Is he doing okay?',
-        speechText: 'Claire? Hi! It’s Ava—you’re listed as the backup contact for your dad, Walter, and we missed him at home. Is he doing okay?',
+        text: 'Hi Michael, this is Ava calling because you are listed as the backup contact for your dad, Richard, and we could not reach his home line. How is he doing?',
+        speechText: 'Hi Michael, this is Ava calling because you are listed as the backup contact for your dad, Richard, and we could not reach his home line. How is he doing?',
       },
       {
         speaker: 'patient',
-        text: 'Hi, yes—Dad had hip surgery three weeks ago, so he is temporarily in rehab.',
-        speechText: 'Hi, yes—Dad had hip surgery three weeks ago, so he is temporarily in rehab.',
+        text: 'Hi Ava, Dad had hip surgery three weeks ago, so he is staying at a rehab center right now.',
+        speechText: 'Hi Ava, Dad had hip surgery three weeks ago, so he is staying at a rehab center right now.',
       },
       {
         speaker: 'agent',
-        text: 'Wishing him a fast recovery! What is the name of the rehab center, and who was his orthopedic surgeon?',
-        speechText: 'Wishing him a fast recovery! What is the name of the rehab center, and who was his orthopedic surgeon?',
+        text: 'We hope his recovery goes smoothly. What is the name of the rehab center, and which surgeon did the procedure?',
+        speechText: 'We hope his recovery goes smoothly. What is the name of the rehab center, and which surgeon did the procedure?',
       },
       {
         speaker: 'patient',
-        text: 'Pinecrest Skilled Nursing in Scottsdale, and Dr. Rebecca Vance at Mayo Clinic did the surgery.',
-        speechText: 'Pinecrest Skilled Nursing in Scottsdale, and Doctor Rebecca Vance at Mayo Clinic did the surgery.',
+        text: 'He is at Pinecrest Skilled Nursing in Scottsdale, and Dr. Rebecca Vance at the Mayo Clinic did the surgery.',
+        speechText: 'He is at Pinecrest Skilled Nursing in Scottsdale, and Doctor Rebecca Vance at the Mayo Clinic did the surgery.',
       },
       {
         speaker: 'agent',
-        text: 'Thanks, Claire. When is he expected back home, and should we check in with you next month?',
-        speechText: 'Thanks, Claire. When is he expected back home, and should we check in with you next month?',
+        text: 'Got it, thank you. Do you know when he will be heading back home, or should we check in with you again next month?',
+        speechText: 'Got it, thank you. Do you know when he will be heading back home, or should we check in with you again next month?',
       },
     ],
   },
   {
     id: 'ls-escalation',
     title: 'Sensitive Event & Claims Triage',
-    patientGender: 'male', // David K.
     lines: [
       {
         speaker: 'agent',
-        text: 'Hi David, it’s Ava calling for a quick check-in on your father Robert’s policy. How is Robert doing?',
-        speechText: 'Hi David! It’s Ava calling for a quick check-in on your father Robert’s policy. How is Robert doing?',
+        text: 'Hi David, this is Ava calling for a quick check-in on your father Robert’s policy. How has Robert been doing?',
+        speechText: 'Hi David, this is Ava calling for a quick check-in on your father Robert’s policy. How has Robert been doing?',
       },
       {
         speaker: 'patient',
-        text: 'This is David. I’m sorry to tell you this, but my father passed away last Tuesday.',
-        speechText: 'This is David. I’m sorry to tell you this, but my father passed away last Tuesday.',
+        text: 'Hi, this is David. I am sorry to tell you this, but my father passed away last Tuesday.',
+        speechText: 'Hi, this is David. I am sorry to tell you this, but my father passed away last Tuesday.',
       },
       {
         speaker: 'agent',
-        text: 'David, I am so deeply sorry for your loss. Let me connect you right now with our Senior Claims Specialist to gently help your family—please hold one moment.',
-        speechText: 'David, I am so deeply sorry for your loss. Let me connect you right now with our Senior Claims Specialist to gently help your family—please hold one moment.',
+        text: 'David, I am so sorry for your loss. Let me connect you right now with our senior claims specialist who can gently walk your family through the next steps.',
+        speechText: 'David, I am so sorry for your loss. Let me connect you right now with our senior claims specialist, who can gently walk your family through the next steps.',
       },
     ],
   },
@@ -252,13 +238,11 @@ function fetchTTS(text, voiceProfile, modelId = 'eleven_v4') {
 async function main() {
   const targetScenarioArg = process.argv.indexOf('--scenario');
   const targetScenarioId = targetScenarioArg !== -1 ? process.argv[targetScenarioArg + 1] : null;
-  const onlyPatient = process.argv.includes('--only-patient');
 
   console.log('--- VocoLS ElevenLabs Audio Generator (Model: eleven_v4) ---');
   console.log('Using API Key:', API_KEY ? `${API_KEY.slice(0, 6)}...${API_KEY.slice(-4)}` : 'MISSING');
   console.log(`Agent Profile: ${VOICE_PROFILES.agent.name}`);
-  console.log(`Male Profile: ${VOICE_PROFILES.patient_male.name}`);
-  console.log(`Female Profile: ${VOICE_PROFILES.patient_female.name}`);
+  console.log(`Insured/Contact Profile: ${VOICE_PROFILES.patient.name}`);
   console.log('');
 
   const outDir = path.resolve(__dirname, '../public/audio/scenarios');
@@ -271,13 +255,8 @@ async function main() {
     ? SCENARIOS.filter((s) => s.id === targetScenarioId)
     : SCENARIOS;
 
-  if (scenariosToRun.length === 0) {
-    console.error(`Error: Scenario "${targetScenarioId}" not found.`);
-    process.exit(1);
-  }
-
   for (const scenario of scenariosToRun) {
-    console.log(`\n▶ Generating Scenario: ${scenario.id} (${scenario.title}) - Gender: ${scenario.patientGender}`);
+    console.log(`\n▶ Generating Scenario: ${scenario.id} (${scenario.title})`);
     const scenarioDir = path.join(outDir, scenario.id);
     fs.mkdirSync(scenarioDir, { recursive: true });
 
@@ -289,29 +268,9 @@ async function main() {
       const filePath = path.join(scenarioDir, filename);
       const publicPath = `/audio/scenarios/${scenario.id}/${filename}`;
 
-      let profile;
-      if (line.speaker === 'agent') {
-        profile = VOICE_PROFILES.agent;
-      } else if (scenario.patientGender === 'female') {
-        profile = VOICE_PROFILES.patient_female;
-      } else {
-        profile = VOICE_PROFILES.patient_male;
-      }
-
-      if (onlyPatient && line.speaker !== 'patient') {
-        manifest[scenario.id].push({
-          index: i,
-          speaker: line.speaker,
-          voiceId: profile.voiceId,
-          audioUrl: publicPath,
-          bytes: fs.existsSync(filePath) ? fs.statSync(filePath).size : 0,
-          model: 'eleven_v4',
-        });
-        continue;
-      }
-
+      const profile = line.speaker === 'agent' ? VOICE_PROFILES.agent : VOICE_PROFILES.patient;
       const speechToSynthesize = line.speechText || line.text;
-      console.log(`  [${i + 1}/${scenario.lines.length}] ${profile.name}: "${speechToSynthesize.slice(0, 55)}..."`);
+      console.log(`  [${i + 1}/${scenario.lines.length}] ${profile.name}: "${speechToSynthesize.slice(0, 58)}..."`);
 
       try {
         const audioBuffer = await fetchTTS(speechToSynthesize, profile, 'eleven_v4');

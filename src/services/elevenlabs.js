@@ -6,7 +6,6 @@
 export const VOICES = {
   AVA_AGENT: 'OYq3gdwlWVVaI8ECjSk1', // Female Agent (Briseida)
   INSURED_MALE: 'PXMcl9zGUnc9w7DofLWk', // Male Insured/Contact (Mark Vale)
-  INSURED_FEMALE: 'lnnkVRtB3hSBA22O4kcA', // Female Insured/Contact (Lina)
 };
 
 const audioCache = new Map();
