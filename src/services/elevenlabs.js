@@ -4,9 +4,9 @@
  */
 
 export const VOICES = {
-  AVA_LUCY: 'r5iFzIytiA1rzjhWFCjW', // Lucy - Friendly, Relaxed & Thoughtful (Ava Agent)
-  PATIENT_JOSH: 'ZoiZ8fuDWInAcwPXaVeq', // Josh - Warm, Smooth and Steady (Male Patient)
-  PATIENT_FEMALE: '56AoDkrOh6qfVPDXZ7Pt', // Cassidy - Crisp, Direct and Clear (Female Patient)
+  AVA_AGENT: 'OYq3gdwlWVVaI8ECjSk1', // Female Agent (Briseida)
+  INSURED_MALE: 'PXMcl9zGUnc9w7DofLWk', // Male Insured/Contact (Mark Vale)
+  INSURED_FEMALE: 'lnnkVRtB3hSBA22O4kcA', // Female Insured/Contact (Lina)
 };
 
 const audioCache = new Map();
@@ -15,7 +15,7 @@ const audioCache = new Map();
  * Synthesizes text to speech using ElevenLabs and returns a playable Blob URL.
  * Automatically caches results in memory.
  */
-export async function synthesizeSpeech(text, voiceId = VOICES.AVA_LUCY) {
+export async function synthesizeSpeech(text, voiceId = VOICES.AVA_AGENT) {
   const cacheKey = `${voiceId}:${text}`;
   if (audioCache.has(cacheKey)) {
     return audioCache.get(cacheKey);
@@ -41,7 +41,7 @@ export async function synthesizeSpeech(text, voiceId = VOICES.AVA_LUCY) {
 /**
  * One-line helper to synthesize and immediately play speech.
  */
-export async function playSpeech(text, voiceId = VOICES.AVA_LUCY) {
+export async function playSpeech(text, voiceId = VOICES.AVA_AGENT) {
   const url = await synthesizeSpeech(text, voiceId);
   const audio = new Audio(url);
   await audio.play();

@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed. Use POST.' });
   }
 
-  const { text, voiceId = 'r5iFzIytiA1rzjhWFCjW', modelId = 'eleven_turbo_v2_5' } = req.body || {};
+  const { text, voiceId = 'OYq3gdwlWVVaI8ECjSk1', modelId = 'eleven_v4' } = req.body || {};
 
   if (!text || typeof text !== 'string') {
     return res.status(400).json({ error: 'Missing required field: text' });

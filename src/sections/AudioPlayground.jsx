@@ -89,7 +89,7 @@ export default function AudioPlayground({ autoplayToken }) {
               );
             })}
             <p className="px-1 pt-2 text-xs leading-relaxed text-silver/60">
-              Conversational audio powered by neural voices (Ava as Tracking Agent, simulated Insureds &amp; Designated Contacts). Policy &amp; insured data is fictional.
+              Conversational audio powered by ElevenLabs V4 neural voices (Ava as Tracking Agent, simulated Insureds &amp; Designated Contacts). Policy &amp; insured data is fictional.
             </p>
           </Reveal>
 
