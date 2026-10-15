@@ -10,9 +10,9 @@ const PHASES = [
     statusCls: 'border-brand-teal/40 bg-brand-teal/10 text-brand-teal',
     dot: 'bg-brand-teal',
     icon: Radio,
-    title: 'Voice AI MedSync & Adherence Engine',
-    text: 'Autonomous outbound MedSync, refill reminders, and adherence outreach with PMS write-back.',
-    items: ['Outbound MedSync batch calling', 'Refill & pickup reminders', 'Adherence gap detection', 'Pharmacist escalation'],
+    title: 'Persistent Insured & Contact Tracking Engine',
+    text: 'Unlimited-attempt outbound outreach to insureds and designated contacts with mandatory & dynamic clinical follow-ups.',
+    items: ['Dial-until-reached persistence', 'Dynamic medical & MD follow-ups', 'Designated contact cascading', 'Servicer & fund DB write-back'],
     progress: 100,
   },
   {
@@ -21,10 +21,10 @@ const PHASES = [
     statusCls: 'border-brand-cyan/40 bg-brand-cyan/10 text-brand-cyan',
     dot: 'bg-brand-cyan',
     icon: PhoneIncoming,
-    title: 'Inbound IVR & Smart Call Routing',
-    text: 'Replace legacy phone trees with a conversational front door that resolves or routes every call.',
-    items: ['Conversational inbound IVR', 'Refill status & hours lookup', 'Intent-based routing', 'Overflow & after-hours coverage'],
-    progress: 60,
+    title: 'Automated HIPAA Auth & APS Coordinator',
+    text: 'Streamlines HIPAA authorization renewals and coordinates Attending Physician Statement (APS) retrieval directly from newly identified clinics.',
+    items: ['SMS/email HIPAA e-signature capture', 'Physician office verification calls', 'Automated APS request dispatch', 'Inbound insured callback concierge'],
+    progress: 65,
   },
   {
     phase: 'Phase 3',
@@ -32,10 +32,10 @@ const PHASES = [
     statusCls: 'border-violet-400/40 bg-violet-400/10 text-violet-300',
     dot: 'bg-violet-400',
     icon: Activity,
-    title: 'RPM & Chronic Care Management',
-    text: 'Remote Patient Monitoring and CCM integration for chronic disease populations—new clinical revenue streams.',
-    items: ['RPM device data check-ins', 'CCM monthly touchpoints', 'Time tracking for billing', 'Care-team dashboards'],
-    progress: 25,
+    title: 'Continuous Mortality & LE Intelligence Suite',
+    text: 'Real-time portfolio health delta scoring, obituary/mortality cross-verification, and automated underwriting triggers for institutional funds.',
+    items: ['Structured health delta signals', 'Automated LE re-underwriting triggers', 'Multi-source mortality verification', 'Fund & investor data-room feeds'],
+    progress: 30,
   },
 ];
 
@@ -46,8 +46,8 @@ export default function Roadmap() {
         <SectionHeading
           eyebrow="Platform Roadmap"
           icon={Map}
-          title={<>One voice layer. <span className="text-brand-gradient">A full multi-agent clinical suite.</span></>}
-          description="VocoRx is the entry point into a broader clinical automation ecosystem—each agent shares the same secure voice, data, and compliance core."
+          title={<>One voice layer. <span className="text-brand-gradient">Complete life settlement portfolio intelligence.</span></>}
+          description="VocoLS is the foundational outreach engine for modern policy servicing—connecting persistent voice verification with automated medical record retrieval and fund analytics."
         />
 
         <div className="relative mt-20">

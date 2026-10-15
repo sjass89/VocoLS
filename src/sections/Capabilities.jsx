@@ -1,20 +1,20 @@
 import { motion } from 'framer-motion';
-import { ArrowRightLeft, BellRing, Bot, CalendarCheck, Database, Pill, Sparkles, Stethoscope, UserRound } from 'lucide-react';
+import { ArrowRightLeft, BellRing, Bot, CalendarCheck, Database, PhoneCall, Sparkles, Stethoscope, UserRound } from 'lucide-react';
 import SpotlightCard from '../components/SpotlightCard';
 import { Reveal, SectionHeading } from '../components/ui';
 
-function MedSyncVisual() {
-  const rx = [
-    { name: 'Lisinopril', from: '10/19' },
-    { name: 'Atorvastatin', from: '10/22' },
-    { name: 'Metformin', from: '10/28' },
+function PersistenceVisual() {
+  const attempts = [
+    { name: 'Attempt #1–3 (Insured)', from: 'No Answer' },
+    { name: 'Attempt #4–6 (Shifted)', from: 'Voicemail' },
+    { name: 'Attempt #7 (Evening)', from: 'Dialing' },
   ];
   return (
     <div className="space-y-2">
-      {rx.map((r, i) => (
+      {attempts.map((r, i) => (
         <div key={r.name} className="flex items-center gap-3 text-xs">
-          <Pill className="h-3.5 w-3.5 text-brand-cyan" />
-          <span className="w-24 text-white">{r.name}</span>
+          <PhoneCall className="h-3.5 w-3.5 text-brand-cyan" />
+          <span className="w-36 truncate text-white">{r.name}</span>
           <span className="font-mono text-silver/50 line-through">{r.from}</span>
           <motion.span
             initial={{ scaleX: 0 }}
@@ -23,17 +23,19 @@ function MedSyncVisual() {
             transition={{ delay: 0.3 + i * 0.15, duration: 0.6 }}
             className="h-px flex-1 origin-left bg-linear-to-r from-brand-cyan/10 to-brand-cyan/60"
           />
-          <span className="rounded-md border border-brand-teal/30 bg-brand-teal/10 px-1.5 py-0.5 font-mono text-brand-teal">10/24</span>
+          <span className="rounded-md border border-brand-teal/30 bg-brand-teal/10 px-1.5 py-0.5 font-mono text-brand-teal">
+            {i === 2 ? 'REACHED' : 'Retry'}
+          </span>
         </div>
       ))}
     </div>
   );
 }
 
-function RefillVisual() {
+function FollowUpVisual() {
   const items = [
-    { t: 'Refill ready — reply 1 to confirm', s: 'Outbound · SMS + Voice' },
-    { t: '“Yes, refill my Synthroid.”', s: 'Inbound · authorized' },
+    { t: 'Q1: Any hospitalizations? → “Yes, last month.”', s: 'Core Question · Triggered Branch' },
+    { t: 'Follow-up: Facility, Physician, Diagnosis & Rx captured', s: 'Dynamic Clinical Drill-Down · 100% Complete' },
   ];
   return (
     <div className="space-y-2">
@@ -62,7 +64,7 @@ function TriageVisual() {
     <div className="flex items-center justify-between gap-2 text-xs">
       <div className="flex flex-col items-center gap-1.5">
         <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-cyan/10 ring-1 ring-brand-cyan/30"><Bot className="h-5 w-5 text-brand-cyan" /></span>
-        <span className="text-silver">AI Agent</span>
+        <span className="text-silver">VocoLS AI</span>
       </div>
       <div className="relative h-px flex-1 bg-brand-cyan/20">
         <motion.span
@@ -70,29 +72,29 @@ function TriageVisual() {
           transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute -top-1 h-2 w-2 -translate-x-1/2 rounded-full bg-brand-cyan shadow-[0_0_12px_#00E5FF]"
         />
-        <span className="absolute left-1/2 top-2 -translate-x-1/2 whitespace-nowrap rounded bg-amber-400/10 px-1.5 py-0.5 text-[10px] text-amber-300">DDI detected</span>
+        <span className="absolute left-1/2 top-2 -translate-x-1/2 whitespace-nowrap rounded bg-amber-400/10 px-1.5 py-0.5 text-[10px] text-amber-300">Contact Cascade / Alert</span>
       </div>
       <div className="flex flex-col items-center gap-1.5">
         <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-teal/10 ring-1 ring-brand-teal/30"><UserRound className="h-5 w-5 text-brand-teal" /></span>
-        <span className="text-silver">PharmD</span>
+        <span className="text-silver">Case Mgr</span>
       </div>
     </div>
   );
 }
 
-function PmsVisual() {
+function PortfolioSyncVisual() {
   return (
     <div className="flex items-center justify-between gap-3 text-xs">
       <div className="flex-1 rounded-lg border border-white/5 bg-white/[0.03] px-3 py-2">
-        <p className="text-[10px] uppercase tracking-wider text-silver/70">PMS</p>
-        <p className="font-mono text-white">Rx#48213 · due</p>
+        <p className="text-[10px] uppercase tracking-wider text-silver/70">Servicer DB</p>
+        <p className="font-mono text-white">Pol #LS-9042 · due</p>
       </div>
       <motion.div animate={{ rotate: [0, 180, 360] }} transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}>
         <ArrowRightLeft className="h-4 w-4 text-brand-cyan" />
       </motion.div>
       <div className="flex-1 rounded-lg border border-brand-cyan/20 bg-brand-cyan/[0.06] px-3 py-2">
-        <p className="text-[10px] uppercase tracking-wider text-brand-cyan/80">VocoRx</p>
-        <p className="font-mono text-white">synced · 120ms</p>
+        <p className="text-[10px] uppercase tracking-wider text-brand-cyan/80">VocoLS</p>
+        <p className="font-mono text-white">verified · APS ready</p>
       </div>
     </div>
   );
@@ -101,47 +103,47 @@ function PmsVisual() {
 const CAPABILITIES = [
   {
     icon: CalendarCheck,
-    tag: 'Flagship',
-    title: 'Autonomous MedSync Outreach',
-    text: 'Synchronizes multiple prescriptions into a single pick-up or delivery date—calling, confirming, and short-filling automatically.',
-    chips: ['Anchor-date logic', 'Short-fill proration', 'Batch dialing'],
-    Visual: MedSyncVisual,
-  },
-  {
-    icon: BellRing,
-    tag: 'Inbound + Outbound',
-    title: 'Refill Authorization & Reminders',
-    text: 'Handles inbound refill confirmations and outbound ready-for-pickup notifications without tying up staff.',
-    chips: ['Voice + SMS', 'Smart retry windows', 'Will-call recovery'],
-    Visual: RefillVisual,
+    tag: 'Zero Attempt Caps',
+    title: 'Relentless "Call-Until-Reached" Persistence',
+    text: 'Where standard tracking stops after 3 attempts, VocoLS continues calling across optimized time-of-day and day-of-week windows until the insured or designated contact is reached live.',
+    chips: ['Unlimited attempts', 'Smart time-shifting', 'Designated contact cascade'],
+    Visual: PersistenceVisual,
   },
   {
     icon: Stethoscope,
-    tag: 'Safety-first',
-    title: 'Clinical Escalation Triage',
-    text: 'Seamlessly warm-transfers complex drug interactions or side-effect questions to the on-duty pharmacist—with full context.',
-    chips: ['Intent guardrails', 'Warm transfer', 'Call summary'],
+    tag: '100% Question Depth',
+    title: 'Dynamic Clinical & Follow-Up Questioning',
+    text: 'Never accepts vague answers. When an insured mentions a doctor visit, hospital stay, or therapy change, the AI automatically asks every required follow-up question to capture physician names, dates, and diagnoses.',
+    chips: ['Mandatory script enforcement', 'Multi-level follow-ups', 'APS physician capture'],
+    Visual: FollowUpVisual,
+  },
+  {
+    icon: BellRing,
+    tag: 'Cascade & Triage',
+    title: 'Designated Contact & Mortality Escalation',
+    text: 'Seamlessly pivots to authorized family members, POAs, or designated contacts when needed—and immediately alerts servicing teams or warm-transfers sensitive bereavement and claim events.',
+    chips: ['Authorized contact tree', 'Warm human transfer', 'Immediate claim alerts'],
     Visual: TriageVisual,
   },
   {
     icon: Database,
-    tag: 'Interoperability',
-    title: 'Enterprise PMS Integration',
-    text: 'Real-time, bidirectional sync with major pharmacy management systems so every outcome lands on the patient profile.',
-    chips: ['HL7 / FHIR', 'Write-back', 'Multi-store'],
-    Visual: PmsVisual,
+    tag: 'Fund & Servicer Sync',
+    title: 'Audit-Ready Servicing & Investor Reporting',
+    text: 'Delivers time-stamped audio recordings, full transcripts, structured health deltas, and updated contact trees directly into life settlement maintenance platforms and fund data rooms.',
+    chips: ['REST / SFTP sync', 'Structured health deltas', 'Valuation & LE ready'],
+    Visual: PortfolioSyncVisual,
   },
 ];
 
 export default function Capabilities() {
   return (
-    <section id="medsync" className="relative py-24 sm:py-32">
+    <section id="tracking" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-6">
         <SectionHeading
-          eyebrow="MedSync Automation"
+          eyebrow="Persistent Insured Tracking"
           icon={Sparkles}
-          title={<>Flagship capabilities built for <span className="text-brand-gradient">pharmacy workflows</span></>}
-          description="Purpose-built for retail, compounding, and specialty pharmacy—not a generic call-center bot retrofitted for healthcare."
+          title={<>Purpose-built for <span className="text-brand-gradient">life settlement servicing &amp; funds</span></>}
+          description="Engineered specifically for life settlement maintenance companies, institutional funds, and portfolio investors—combining limitless dialing persistence with clinical-grade questioning."
         />
 
         <div className="mt-16 grid gap-6 md:grid-cols-2">

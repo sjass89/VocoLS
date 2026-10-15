@@ -17,7 +17,7 @@ export default function AudioPlayground({ autoplayToken }) {
   const transcriptRef = useRef(null);
   const totalSec = useMemo(() => Math.round(estimateScript(scenario.lines) / 1000), [scenario]);
 
-  // "Listen to Audio Sample" in hero
+  // "Listen to Tracking Call" in hero
   useEffect(() => {
     if (!autoplayToken) return;
     setActiveId(SCENARIOS[0].id);
@@ -51,8 +51,8 @@ export default function AudioPlayground({ autoplayToken }) {
         <SectionHeading
           eyebrow="Audio Playground"
           icon={Headphones}
-          title={<>Hear VocoRx <span className="text-brand-gradient">handle real pharmacy calls</span></>}
-          description="Toggle between automated call scenarios to hear how the agent verifies identity, syncs prescriptions, and escalates clinical questions."
+          title={<>Hear VocoLS <span className="text-brand-gradient">conduct persistent tracking calls</span></>}
+          description="Toggle between live tracking scenarios to hear how our AI reaches insureds after multiple attempts, drills into medical follow-up questions, cascades to designated contacts, and escalates claims."
         />
 
         <div className="mt-16 grid gap-6 lg:grid-cols-[minmax(0,360px)_1fr]">
@@ -89,7 +89,7 @@ export default function AudioPlayground({ autoplayToken }) {
               );
             })}
             <p className="px-1 pt-2 text-xs leading-relaxed text-silver/60">
-              Conversational audio powered by ElevenLabs neural voices (Lucy as Ava, Cassidy &amp; Josh as Patients). Patient data is fictional.
+              Conversational audio powered by neural voices (Ava as Tracking Agent, simulated Insureds &amp; Designated Contacts). Policy &amp; insured data is fictional.
             </p>
           </Reveal>
 
@@ -103,11 +103,11 @@ export default function AudioPlayground({ autoplayToken }) {
                     {isPlaying ? 'Call in progress' : pb.status === 'done' ? 'Call completed' : pb.status === 'paused' ? 'Paused' : 'Ready'}
                   </p>
                   <h3 className="mt-1 font-display text-xl font-semibold text-white">{scenario.title}</h3>
-                  <p className="text-sm text-silver">{scenario.pharmacy} → {scenario.patient}</p>
+                  <p className="text-sm text-silver">{scenario.servicer} → {scenario.insured}</p>
                 </div>
                 <div className="flex items-center gap-2 text-xs">
                   <span className="rounded-full border border-brand-cyan/40 bg-brand-cyan/10 px-2.5 py-1 text-brand-cyan">
-                    Voice: ElevenLabs HD
+                    Dynamic Follow-Up AI
                   </span>
                   <span className="rounded-full border border-brand-teal/30 bg-brand-teal/10 px-2.5 py-1 text-brand-teal">HIPAA</span>
                 </div>
@@ -119,7 +119,7 @@ export default function AudioPlayground({ autoplayToken }) {
                 <div className="relative mb-3 flex items-center justify-between text-[11px] uppercase tracking-wider">
                   <span className={`flex items-center gap-1.5 ${speaking ? 'text-white' : 'text-silver/60'}`}>
                     {pb.speaker === 'patient' ? <User className="h-3.5 w-3.5" /> : <Bot className="h-3.5 w-3.5 text-brand-cyan" />}
-                    {speaking ? (pb.speaker === 'agent' ? 'Agent' : 'Patient') : pb.speaker === 'system' ? 'Writing to PMS…' : 'Idle'}
+                    {speaking ? (pb.speaker === 'agent' ? 'VocoLS Agent' : 'Insured / Contact') : pb.speaker === 'system' ? 'Writing to Servicer DB…' : 'Idle'}
                   </span>
                   <span className="font-mono text-silver/60 tabular-nums">{fmt(pb.elapsed)} / {fmt(totalSec)}</span>
                 </div>
@@ -150,7 +150,7 @@ export default function AudioPlayground({ autoplayToken }) {
                   className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-silver transition hover:border-brand-cyan/50 hover:text-white"
                 >
                   <RotateCcw className="h-4 w-4" />
-                </motion.button>
+                                </motion.button>
                 <motion.button
                   whileTap={{ scale: 0.9 }}
                   onClick={() => pb.supported && pb.setMuted((m) => !m)}
@@ -169,7 +169,7 @@ export default function AudioPlayground({ autoplayToken }) {
                     <div className="grid h-full place-items-center text-center text-sm text-silver/60">
                       <div>
                         <AudioLines className="mx-auto mb-2 h-6 w-6 text-brand-cyan/60" />
-                        Press play to start the simulated call.
+                        Press play to start the simulated tracking call.
                       </div>
                     </div>
                   )}
@@ -192,7 +192,7 @@ export default function AudioPlayground({ autoplayToken }) {
                             } ${i === pb.lineIndex && speaking ? 'shadow-[0_0_20px_rgba(0,229,255,0.25)]' : ''}`}
                           >
                             <span className={`mb-0.5 block text-[10px] font-semibold uppercase tracking-wider ${l.speaker === 'agent' ? 'text-brand-cyan' : 'text-silver'}`}>
-                              {l.speaker === 'agent' ? 'VocoRx Agent' : scenario.patient}
+                              {l.speaker === 'agent' ? 'VocoLS Agent' : scenario.insured}
                             </span>
                             {l.text}
                           </div>
@@ -203,7 +203,7 @@ export default function AudioPlayground({ autoplayToken }) {
                 </div>
 
                 <div className="rounded-xl border border-white/5 bg-abyss/40 p-4">
-                  <p className="text-[11px] font-semibold uppercase tracking-wider text-silver/70">Call outcomes</p>
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-silver/70">Tracking outcomes</p>
                   <ul className="mt-3 space-y-2.5">
                     {scenario.outcomes.map((o, i) => {
                       const threshold = Math.floor(((i + 1) / scenario.outcomes.length) * (scenario.lines.length - 1));

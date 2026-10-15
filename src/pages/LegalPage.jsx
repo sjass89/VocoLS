@@ -35,7 +35,7 @@ export default function LegalPage({ currentDocId = 'privacy', onSelectDoc, onBac
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = `${doc.title} — VocoRx Trust & Legal`;
+    document.title = `${doc.title} — VocoLS Trust & Legal`;
   }, [activeDocKey, doc.title]);
 
   const handleSelect = (key) => {
@@ -165,18 +165,18 @@ export default function LegalPage({ currentDocId = 'privacy', onSelectDoc, onBac
           <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-white/10 pt-6 text-xs text-silver/70">
             <div>
               <span className="text-silver/40">Entity: </span>
-              <strong className="text-white font-medium">VitalGuard LLC</strong> (d/b/a VocoRx)
+              <strong className="text-white font-medium">VitalGuard LLC</strong> (d/b/a VocoLS)
             </div>
             <div className="hidden h-3 w-px bg-white/10 sm:block" />
             <div>
               <span className="text-silver/40">Jurisdiction: </span>
-              <span className="text-silver">United States (HIPAA / State Pharmacy Board Compliant)</span>
+              <span className="text-silver">United States (HIPAA &amp; State Life Settlement Regulations)</span>
             </div>
             <div className="hidden h-3 w-px bg-white/10 sm:block" />
             <div>
               <span className="text-silver/40">Questions: </span>
-              <a href="mailto:legal@vocorx.ai" className="text-brand-cyan hover:underline">
-                legal@vocorx.ai
+              <a href="mailto:legal@vocols.ai" className="text-brand-cyan hover:underline">
+                legal@vocols.ai
               </a>
             </div>
           </div>
@@ -246,17 +246,17 @@ export default function LegalPage({ currentDocId = 'privacy', onSelectDoc, onBac
               <div className="rounded-2xl border border-brand-teal/20 bg-linear-to-br from-brand-teal/[0.08] to-transparent p-5 text-xs">
                 <div className="flex items-center gap-2 font-semibold text-white">
                   <FileCheck2 className="h-4 w-4 text-brand-teal" />
-                  <span>Request Custom BAA</span>
+                  <span>Request Custom BAA / NDA</span>
                 </div>
                 <p className="mt-2 leading-relaxed text-silver">
-                  Enterprise health systems and multi-location retail chains can execute custom BAAs with our legal team.
+                  Life settlement maintenance companies, institutional funds, and investors can execute custom BAAs and NDAs with our legal team.
                 </p>
                 <a
-                  href="mailto:compliance@vocorx.ai?subject=Enterprise%20BAA%20Request%20-%20VocoRx"
+                  href="mailto:compliance@vocols.ai?subject=Enterprise%20BAA%20Request%20-%20VocoLS"
                   className="mt-3 inline-flex items-center gap-1.5 font-medium text-brand-cyan hover:underline"
                 >
                   <Mail className="h-3 w-3" />
-                  <span>compliance@vocorx.ai</span>
+                  <span>compliance@vocols.ai</span>
                 </a>
               </div>
             </div>
@@ -310,12 +310,12 @@ export default function LegalPage({ currentDocId = 'privacy', onSelectDoc, onBac
             {/* Bottom Entity Footer */}
             <div className="border-t border-white/10 pt-8 text-center text-xs text-silver/50">
               <p>
-                VitalGuard LLC · VocoRx Autonomous Healthcare Voice Systems · 100 Enterprise Way, Suite 400, Wilmington, DE 19801
+                VitalGuard LLC · VocoLS Autonomous Life Settlement Tracking Systems · 100 Enterprise Way, Suite 400, Wilmington, DE 19801
               </p>
               <p className="mt-1">
                 For legal correspondence, please contact{' '}
-                <a href="mailto:legal@vocorx.ai" className="text-brand-cyan hover:underline">
-                  legal@vocorx.ai
+                <a href="mailto:legal@vocols.ai" className="text-brand-cyan hover:underline">
+                  legal@vocols.ai
                 </a>
               </p>
             </div>

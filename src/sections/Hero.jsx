@@ -3,17 +3,27 @@ import { ArrowRight, ChevronRight, CircleCheck, Play } from 'lucide-react';
 import { Button, LiveDot } from '../components/ui';
 import LiveAgentCard from './LiveAgentCard';
 
-const HEADLINE = ['The', 'Voice', 'AI', 'Digital', 'Employee', 'for', 'Modern', 'Pharmacies.'];
-const ACCENT = new Set(['Digital', 'Employee']);
+const HEADLINE = ['Persistent', 'AI', 'Insured', 'Tracking', 'for', 'Life', 'Settlement', 'Portfolios.'];
+const ACCENT = new Set(['Insured', 'Tracking']);
 
 const STATS = [
-  { value: '4+ hrs', label: 'Phone time returned per store, daily' },
+  { value: '∞ Dials', label: 'Calls until reached — zero attempt caps' },
+  { value: '100%', label: 'Required & follow-up questions asked' },
   { value: '<600ms', label: 'Conversational response latency' },
-  { value: '24/7', label: 'Outbound + inbound coverage' },
-  { value: '99.2%', label: 'Autonomous task completion' },
+  { value: '24/7', label: 'Insured & designated contact outreach' },
 ];
 
-const INTEGRATIONS = ['HL7 v2', 'FHIR R4', 'NCPDP SCRIPT', 'SFTP Batch', 'REST & Webhooks', 'SIP / PSTN', 'SMS Confirmations', 'SSO / SAML', 'Audit Logging'];
+const INTEGRATIONS = [
+  'Policy Admin Systems',
+  'REST & Webhooks',
+  'SFTP Portfolio Sync',
+  'Designated Contact Cascade',
+  'Attending Physician Capture',
+  'HIPAA / SOC 2 Audit Logs',
+  'SIP / PSTN Telephony',
+  'Fund & Servicer Portals',
+  'SSO / SAML',
+];
 
 export default function Hero({ onListen }) {
   return (
@@ -30,16 +40,16 @@ export default function Hero({ onListen }) {
             className="group inline-flex items-center gap-2.5 rounded-full border border-brand-cyan/25 bg-brand-cyan/[0.07] py-1.5 pl-3 pr-2 text-xs font-medium text-white backdrop-blur transition-colors hover:border-brand-cyan/60 sm:text-[13px]"
           >
             <LiveDot />
-            Next-Gen Autonomous Pharmacy Voice AI
+            Built for Life Settlement Maintenance, Funds &amp; Investors
             <span className="grid h-5 w-5 place-items-center rounded-full bg-brand-cyan/15 transition group-hover:bg-brand-cyan/30">
               <ChevronRight className="h-3.5 w-3.5 text-brand-cyan" />
             </span>
           </motion.a>
 
-          <h1 className="mt-7 font-display text-[40px] font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[64px]">
+          <h1 className="mt-7 font-display text-[40px] font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[62px]">
             {HEADLINE.map((word, i) => (
               <motion.span
-                key={word}
+                key={`${word}-${i}`}
                 initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
                 animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 transition={{ delay: 0.15 + i * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -56,8 +66,7 @@ export default function Hero({ onListen }) {
             transition={{ delay: 0.7, duration: 0.6 }}
             className="mt-6 max-w-xl text-base leading-relaxed text-silver sm:text-lg"
           >
-            VocoRx autonomously calls patients, schedules MedSync refills, and answers routine pharmacy inquiries—slashing unbillable
-            phone hours and boosting prescription adherence on autopilot.
+            Where traditional tracking services stop after 3 or 4 failed attempts, <strong className="font-medium text-white">VocoLS calls until someone is reached</strong>—and always asks every mandatory wellness question plus intelligent, real-time clinical follow-up questions.
           </motion.p>
 
           <motion.div
@@ -67,10 +76,10 @@ export default function Hero({ onListen }) {
             className="mt-9 flex flex-col gap-3 sm:flex-row"
           >
             <Button href="#book" icon={ArrowRight} className="!px-7 !py-3.5">
-              Schedule a Live Demo
+              Schedule a Portfolio Demo
             </Button>
             <Button variant="secondary" onClick={onListen} iconLeft={Play} className="!px-7 !py-3.5">
-              Listen to Audio Sample
+              Listen to Tracking Call
             </Button>
           </motion.div>
 
@@ -80,7 +89,7 @@ export default function Hero({ onListen }) {
             transition={{ delay: 1.05 }}
             className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-silver"
           >
-            {['HIPAA-ready with BAA', 'Live in under 14 days', 'No new hardware'].map((t) => (
+            {['Calls until live contact is made', 'Dynamic follow-up questioning', 'HIPAA & state privacy compliant'].map((t) => (
               <li key={t} className="flex items-center gap-2">
                 <CircleCheck className="h-4 w-4 text-brand-teal" /> {t}
               </li>
@@ -119,7 +128,7 @@ export default function Hero({ onListen }) {
 
         {/* integration marquee */}
         <div className="mt-10 flex flex-col items-center gap-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-silver/70">Interoperable with your pharmacy stack</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-silver/70">Interoperable with your servicing &amp; fund administration stack</p>
           <div className="mask-fade-x w-full overflow-hidden">
             <div className="flex w-max animate-marquee gap-3 hover:[animation-play-state:paused]">
               {[...INTEGRATIONS, ...INTEGRATIONS].map((name, i) => (

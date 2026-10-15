@@ -6,10 +6,10 @@ import { Button } from '../components/ui';
 
 export const NAV = [
   { label: 'Platform', href: '#platform' },
-  { label: 'MedSync Automation', href: '#medsync' },
+  { label: 'Persistent Tracking', href: '#tracking' },
   { label: 'Roadmap', href: '#roadmap' },
   { label: 'Security & HIPAA', href: '#security' },
-  { label: 'ROI', href: '#roi' },
+  { label: 'Portfolio ROI', href: '#roi' },
 ];
 
 export default function Header() {
@@ -51,7 +51,7 @@ export default function Header() {
           scrolled ? 'glass shadow-[0_10px_40px_-12px_rgba(0,0,0,0.6)]' : 'border border-transparent'
         }`}
       >
-        <a href="#top" className="shrink-0" aria-label="VocoRx home">
+        <a href="#top" className="shrink-0" aria-label="VocoLS home">
           <Logo />
         </a>
 

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, Building2, CircleCheck, LoaderCircle, Mail, MapPin, Rocket, User } from 'lucide-react';
+import { ArrowRight, Building2, CircleCheck, Layers, LoaderCircle, Mail, Rocket, User } from 'lucide-react';
 import Waveform from '../components/Waveform';
 import { Button, Eyebrow, Reveal } from '../components/ui';
 
-const LOCATION_OPTIONS = ['1', '2–5', '6–25', '26–100', '100+'];
+const PORTFOLIO_OPTIONS = ['Under 250 policies', '250–1,000 policies', '1,000–5,000 policies', '5,000–15,000 policies', '15,000+ policies'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 function Field({ icon: Icon, label, error, children }) {
@@ -25,7 +25,7 @@ function Field({ icon: Icon, label, error, children }) {
 }
 
 export default function LeadCapture({ onOpenLegal }) {
-  const [form, setForm] = useState({ name: '', pharmacy: '', locations: '', email: '' });
+  const [form, setForm] = useState({ name: '', organization: '', portfolioSize: '', email: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | loading | success
 
@@ -37,8 +37,8 @@ export default function LeadCapture({ onOpenLegal }) {
   const validate = () => {
     const e = {};
     if (!form.name.trim()) e.name = 'Please enter your name';
-    if (!form.pharmacy.trim()) e.pharmacy = 'Please enter your pharmacy name';
-    if (!form.locations) e.locations = 'Select number of locations';
+    if (!form.organization.trim()) e.organization = 'Please enter your company or fund name';
+    if (!form.portfolioSize) e.portfolioSize = 'Select portfolio size';
     if (!EMAIL_RE.test(form.email)) e.email = 'Enter a valid work email';
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -48,8 +48,6 @@ export default function LeadCapture({ onOpenLegal }) {
     e.preventDefault();
     if (!validate()) return;
     setStatus('loading');
-    // TODO: replace with your CRM / scheduling endpoint, e.g.
-    // await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
     await new Promise((r) => setTimeout(r, 1200));
     setStatus('success');
   };
@@ -67,15 +65,19 @@ export default function LeadCapture({ onOpenLegal }) {
 
             <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
               <div>
-                <Eyebrow icon={Rocket}>30-day pilot program</Eyebrow>
-                <h2 className="mt-6 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[56px]">
-                  Put Your MedSync Queue on <span className="text-brand-gradient">Autopilot.</span>
+                <Eyebrow icon={Rocket}>30-Day Portfolio Pilot</Eyebrow>
+                <h2 className="mt-6 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[54px]">
+                  Eliminate &ldquo;Unreached&rdquo; Policies on <span className="text-brand-gradient">Autopilot.</span>
                 </h2>
                 <p className="mt-5 max-w-lg text-lg leading-relaxed text-silver">
-                  Launch a pilot in under two weeks. We connect to your PMS, configure your call scripts, and start returning hours to your team immediately.
+                  Test VocoLS on your hardest-to-reach cohort or full servicing queue. We call until someone is reached and ask every mandatory and clinical follow-up question.
                 </p>
                 <ul className="mt-8 space-y-3 text-sm">
-                  {['White-glove onboarding & script tuning', 'BAA signed before any PHI is shared', 'Cancel anytime during the pilot'].map((t) => (
+                  {[
+                    'Custom questionnaire & dynamic follow-up logic tuning',
+                    'Unlimited dial attempts across insureds & designated contacts',
+                    'BAA & NDA executed before any policy data is shared',
+                  ].map((t) => (
                     <li key={t} className="flex items-center gap-2.5 text-white/90">
                       <CircleCheck className="h-4 w-4 text-brand-teal" /> {t}
                     </li>
@@ -105,10 +107,10 @@ export default function LeadCapture({ onOpenLegal }) {
                       </motion.span>
                       <h3 className="mt-6 font-display text-2xl font-semibold text-white">You&apos;re on the pilot list, {form.name.split(' ')[0]}!</h3>
                       <p className="mt-3 max-w-sm text-silver">
-                        Our pharmacy automation team will reach out to <span className="text-white">{form.email}</span> within one business day to schedule your onboarding.
+                        Our life settlement servicing specialists will reach out to <span className="text-white">{form.email}</span> within one business day to configure your tracking pilot.
                       </p>
                       <button
-                        onClick={() => { setStatus('idle'); setForm({ name: '', pharmacy: '', locations: '', email: '' }); }}
+                        onClick={() => { setStatus('idle'); setForm({ name: '', organization: '', portfolioSize: '', email: '' }); }}
                         className="mt-8 text-sm text-brand-cyan underline-offset-4 hover:underline"
                       >
                         Submit another request
@@ -117,28 +119,28 @@ export default function LeadCapture({ onOpenLegal }) {
                   ) : (
                     <motion.form key="form" onSubmit={submit} noValidate initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-5">
                       <div>
-                        <h3 className="font-display text-xl font-semibold text-white">Book your pilot</h3>
-                        <p className="mt-1 text-sm text-silver">Takes 30 seconds. No commitment.</p>
+                        <h3 className="font-display text-xl font-semibold text-white">Book a portfolio pilot</h3>
+                        <p className="mt-1 text-sm text-silver">For maintenance companies, funds &amp; institutional investors.</p>
                       </div>
                       <Field icon={User} label="Full name" error={errors.name}>
-                        <input className={inputCls} placeholder="Dr. Jordan Lee" value={form.name} onChange={update('name')} autoComplete="name" />
+                        <input className={inputCls} placeholder="Jordan Vance, Managing Director" value={form.name} onChange={update('name')} autoComplete="name" />
                       </Field>
-                      <Field icon={Building2} label="Pharmacy name" error={errors.pharmacy}>
-                        <input className={inputCls} placeholder="Main St Pharmacy" value={form.pharmacy} onChange={update('pharmacy')} autoComplete="organization" />
+                      <Field icon={Building2} label="Company / Fund / Servicer name" error={errors.organization}>
+                        <input className={inputCls} placeholder="Meridian Life Settlement Partners" value={form.organization} onChange={update('organization')} autoComplete="organization" />
                       </Field>
-                      <Field icon={MapPin} label="Number of locations" error={errors.locations}>
-                        <select className={`${inputCls} cursor-pointer appearance-none ${form.locations ? '' : 'text-silver/40'}`} value={form.locations} onChange={update('locations')}>
-                          <option value="" disabled className="bg-midnight">Select…</option>
-                          {LOCATION_OPTIONS.map((o) => (
-                            <option key={o} value={o} className="bg-midnight text-white">{o} {o === '1' ? 'location' : 'locations'}</option>
+                      <Field icon={Layers} label="Policies under management / tracking" error={errors.portfolioSize}>
+                        <select className={`${inputCls} cursor-pointer appearance-none ${form.portfolioSize ? '' : 'text-silver/40'}`} value={form.portfolioSize} onChange={update('portfolioSize')}>
+                          <option value="" disabled className="bg-midnight">Select portfolio size…</option>
+                          {PORTFOLIO_OPTIONS.map((o) => (
+                            <option key={o} value={o} className="bg-midnight text-white">{o}</option>
                           ))}
                         </select>
                       </Field>
                       <Field icon={Mail} label="Work email" error={errors.email}>
-                        <input type="email" className={inputCls} placeholder="you@pharmacy.com" value={form.email} onChange={update('email')} autoComplete="email" />
+                        <input type="email" className={inputCls} placeholder="you@settlementfund.com" value={form.email} onChange={update('email')} autoComplete="email" />
                       </Field>
                       <Button type="submit" icon={status === 'loading' ? undefined : ArrowRight} iconLeft={status === 'loading' ? LoaderCircle : undefined} disabled={status === 'loading'} className={`w-full !py-4 text-base ${status === 'loading' ? '[&_svg]:animate-spin' : ''}`}>
-                        {status === 'loading' ? 'Booking…' : 'Book Pilot'}
+                        {status === 'loading' ? 'Scheduling…' : 'Schedule Portfolio Pilot'}
                       </Button>
                       <p className="text-center text-xs text-silver/60">
                         By submitting, you agree to our{' '}

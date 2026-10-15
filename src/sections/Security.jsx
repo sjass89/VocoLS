@@ -4,17 +4,17 @@ import SpotlightCard from '../components/SpotlightCard';
 import { Reveal, SectionHeading } from '../components/ui';
 
 const BADGES = [
-  { icon: ShieldCheck, title: 'HIPAA Compliant', text: 'Signed BAA, PHI minimization, and safeguards mapped to the Security Rule.', stat: 'BAA' },
-  { icon: Lock, title: 'End-to-End Encryption', text: 'TLS 1.3 in transit and AES-256 at rest for audio, transcripts, and metadata.', stat: 'AES-256' },
-  { icon: FileCheck2, title: 'SOC 2 Type II Alignment', text: 'Controls designed around SOC 2 Trust Services Criteria with continuous monitoring.', stat: 'SOC 2' },
-  { icon: Activity, title: '99.99% Uptime SLA', text: 'Multi-region, redundant telephony and inference with automatic failover.', stat: '99.99%' },
+  { icon: ShieldCheck, title: 'HIPAA & State Privacy', text: 'Signed BAA, PHI protection, and compliance with state life settlement privacy & tracking regulations.', stat: 'BAA' },
+  { icon: Lock, title: 'End-to-End Encryption', text: 'TLS 1.3 in transit and AES-256 at rest for call recordings, transcripts, and policy metadata.', stat: 'AES-256' },
+  { icon: FileCheck2, title: 'SOC 2 Type II Alignment', text: 'Institutional-grade controls built for life settlement funds, trustees, and regulated servicers.', stat: 'SOC 2' },
+  { icon: Activity, title: '99.99% Uptime SLA', text: 'Multi-region, redundant telephony and inference ensuring uninterrupted portfolio tracking.', stat: '99.99%' },
 ];
 
 const CONTROLS = [
-  { icon: Fingerprint, label: 'Patient identity verification' },
+  { icon: Fingerprint, label: 'Insured & POA identity verification' },
   { icon: UserCog, label: 'Role-based access & SSO' },
-  { icon: Eye, label: 'Immutable audit logs' },
-  { icon: KeyRound, label: 'Customer-managed keys' },
+  { icon: Eye, label: 'Immutable audio & transcript audit logs' },
+  { icon: KeyRound, label: 'Tenant-isolated fund partitions' },
   { icon: ServerCog, label: 'US-only data residency' },
 ];
 
@@ -24,10 +24,10 @@ export default function Security() {
       <div aria-hidden className="absolute inset-x-0 top-1/2 -z-10 h-[500px] -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(0,229,255,0.08),transparent_65%)]" />
       <div className="mx-auto max-w-7xl px-5 sm:px-6">
         <SectionHeading
-          eyebrow="Security & HIPAA"
+          eyebrow="Security & Compliance"
           icon={ShieldCheck}
-          title={<>Enterprise-ready from <span className="text-brand-gradient">the first call</span></>}
-          description="Built for regulated healthcare environments, with the controls your compliance, IT, and legal teams expect."
+          title={<>Institutional-grade governance from <span className="text-brand-gradient">the first dial</span></>}
+          description="Built for regulated life settlement servicers, institutional funds, and asset managers—with the auditability your compliance, legal, and investment committees require."
         />
 
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

@@ -44,7 +44,7 @@ export default function App() {
       if (matched) {
         setLegalDoc(matched);
         setView('legal');
-      } else if (!hashKey || ['top', 'platform', 'medsync', 'roadmap', 'security', 'roi', 'book', 'demo'].includes(hashKey)) {
+      } else if (!hashKey || ['top', 'platform', 'tracking', 'medsync', 'roadmap', 'security', 'roi', 'book', 'demo'].includes(hashKey)) {
         setView('home');
       }
     };
@@ -71,7 +71,7 @@ export default function App() {
     setView('home');
     window.history.pushState(null, '', window.location.pathname);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = 'VocoRx — Autonomous Voice AI for Pharmacies';
+    document.title = 'VocoLS — Autonomous Voice AI Insured Tracking for Life Settlements';
   }, []);
 
   const handleSelectDoc = useCallback((docKey) => {

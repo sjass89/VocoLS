@@ -4,10 +4,10 @@ import { ArrowRight, Calculator, Clock, DollarSign, PhoneCall, TrendingUp } from
 import SpotlightCard from '../components/SpotlightCard';
 import { Button, Reveal, SectionHeading } from '../components/ui';
 
-const AUTOMATION_RATE = 0.85; // share of outreach VocoRx completes without staff
-const ATTEMPTS_PER_PATIENT = 1.6; // dials incl. retries / voicemail, per month
-const RECOVERED_FILL_RATE = 0.06; // extra fills recovered via adherence outreach
-const GROSS_PROFIT_PER_FILL = 14;
+const AUTOMATION_RATE = 0.94; // share of outreach completed autonomously via persistent calling
+const AVG_ATTEMPTS_UNTIL_REACHED = 4.8; // average dials across time windows to reach insured or contact
+const UNREACHED_RECOVERY_RATE = 0.28; // share of policies previously failing 3-attempt caps now verified
+const VALUE_PER_VERIFIED_POLICY = 45; // servicing & valuation accuracy value per newly reached touchpoint
 
 function AnimatedNumber({ value, format }) {
   const spring = useSpring(value, { stiffness: 110, damping: 22 });
@@ -45,40 +45,41 @@ function Slider({ label, value, min, max, step = 1, onChange, suffix = '', prefi
 }
 
 export default function ROI() {
-  const [locations, setLocations] = useState(5);
-  const [patients, setPatients] = useState(250);
-  const [minutes, setMinutes] = useState(6);
-  const [wage, setWage] = useState(22);
+  const [policies, setPolicies] = useState(1500);
+  const [touchpoints, setTouchpoints] = useState(4);
+  const [minutes, setMinutes] = useState(12);
+  const [wage, setWage] = useState(32);
 
-  const calls = locations * patients * ATTEMPTS_PER_PATIENT;
-  const hoursSaved = ((calls * minutes) / 60) * AUTOMATION_RATE;
-  const laborSaved = hoursSaved * wage;
-  const recovered = locations * patients * RECOVERED_FILL_RATE * GROSS_PROFIT_PER_FILL;
-  const annual = (laborSaved + recovered) * 12;
+  const annualOutreachCycles = policies * touchpoints;
+  const totalDials = annualOutreachCycles * AVG_ATTEMPTS_UNTIL_REACHED;
+  const hoursSavedAnnually = ((annualOutreachCycles * minutes) / 60) * AUTOMATION_RATE;
+  const laborSavedAnnually = hoursSavedAnnually * wage;
+  const newlyReachedTouchpoints = annualOutreachCycles * UNREACHED_RECOVERY_RATE;
+  const portfolioProtectionValue = newlyReachedTouchpoints * VALUE_PER_VERIFIED_POLICY;
+  const annualImpact = laborSavedAnnually + portfolioProtectionValue;
 
   return (
     <section id="roi" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-6">
         <SectionHeading
-          eyebrow="ROI Calculator"
+          eyebrow="Portfolio ROI Calculator"
           icon={Calculator}
-          title={<>See what autopilot is <span className="text-brand-gradient">worth to your pharmacy</span></>}
-          description="Adjust the inputs to estimate monthly staff hours returned and the combined labor + adherence impact across your locations."
+          title={<>See what persistent tracking is <span className="text-brand-gradient">worth to your portfolio</span></>}
+          description="Estimate annual servicing labor saved and the portfolio value of eliminating 'Unreached' policies across your life settlement maintenance operation or fund."
         />
 
         <div className="mt-16 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
           <Reveal>
             <SpotlightCard className="h-full p-7 sm:p-9">
-              <h3 className="font-display text-lg font-semibold text-white">Your pharmacy</h3>
+              <h3 className="font-display text-lg font-semibold text-white">Your portfolio parameters</h3>
               <div className="mt-7 space-y-7">
-                <Slider label="Number of locations" value={locations} min={1} max={150} onChange={setLocations} />
-                <Slider label="MedSync / refill patients per location" value={patients} min={50} max={1500} step={10} onChange={setPatients} />
-                <Slider label="Avg. minutes per manual call" value={minutes} min={2} max={15} onChange={setMinutes} suffix=" min" />
-                <Slider label="Technician hourly cost" value={wage} min={15} max={45} onChange={setWage} prefix="$" suffix="/hr" />
+                <Slider label="Active policies under management" value={policies} min={100} max={10000} step={100} onChange={setPolicies} />
+                <Slider label="Scheduled tracking cycles per year" value={touchpoints} min={1} max={12} step={1} onChange={setTouchpoints} suffix=" / yr" />
+                <Slider label="Specialist minutes per outreach cycle (incl. retries)" value={minutes} min={5} max={25} onChange={setMinutes} suffix=" min" />
+                <Slider label="Servicing specialist hourly cost" value={wage} min={20} max={65} onChange={setWage} prefix="$" suffix="/hr" />
               </div>
               <p className="mt-8 text-xs leading-relaxed text-silver/60">
-                Assumes {ATTEMPTS_PER_PATIENT} dial attempts per patient/month, {Math.round(AUTOMATION_RATE * 100)}% autonomous completion, and{' '}
-                {Math.round(RECOVERED_FILL_RATE * 100)}% recovered fills at ${GROSS_PROFIT_PER_FILL} gross profit. Illustrative estimate only.
+                Models unlimited dial persistence (avg. {AVG_ATTEMPTS_UNTIL_REACHED} dials/cycle until live contact), {Math.round(AUTOMATION_RATE * 100)}% autonomous completion with full follow-up questioning, and recovery of {Math.round(UNREACHED_RECOVERY_RATE * 100)}% of policies typically abandoned under 3-attempt vendor caps.
               </p>
             </SpotlightCard>
           </Reveal>
@@ -86,21 +87,21 @@ export default function ROI() {
           <Reveal delay={0.1}>
             <div className="relative h-full overflow-hidden rounded-[1.25rem] border border-brand-cyan/25 bg-linear-to-br from-brand-cyan/[0.1] via-slate-card/70 to-slate-card/70 p-7 backdrop-blur-md sm:p-9">
               <div aria-hidden className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand-cyan/20 blur-3xl" />
-              <p className="relative text-sm uppercase tracking-[0.18em] text-brand-cyan">Estimated annual impact</p>
+              <p className="relative text-sm uppercase tracking-[0.18em] text-brand-cyan">Estimated annual portfolio impact</p>
               <p className="relative mt-3 font-display text-5xl font-semibold text-white sm:text-6xl">
-                <AnimatedNumber value={annual} format={usd} />
+                <AnimatedNumber value={annualImpact} format={usd} />
               </p>
-              <p className="relative mt-2 text-silver">in recovered labor and adherence revenue per year</p>
+              <p className="relative mt-2 text-silver">in annual servicing savings and verified portfolio intelligence</p>
 
               <div className="relative mt-9 grid gap-4 sm:grid-cols-2">
-                <Stat icon={Clock} label="Staff hours returned / mo" value={<AnimatedNumber value={hoursSaved} format={num} />} />
-                <Stat icon={DollarSign} label="Labor savings / mo" value={<AnimatedNumber value={laborSaved} format={usd} />} />
-                <Stat icon={PhoneCall} label="Calls automated / mo" value={<AnimatedNumber value={calls * AUTOMATION_RATE} format={num} />} />
-                <Stat icon={TrendingUp} label="Adherence revenue / mo" value={<AnimatedNumber value={recovered} format={usd} />} />
+                <Stat icon={Clock} label="Specialist hours saved / yr" value={<AnimatedNumber value={hoursSavedAnnually} format={num} />} />
+                <Stat icon={DollarSign} label="Servicing labor saved / yr" value={<AnimatedNumber value={laborSavedAnnually} format={usd} />} />
+                <Stat icon={PhoneCall} label="Persistent dials executed / yr" value={<AnimatedNumber value={totalDials} format={num} />} />
+                <Stat icon={TrendingUp} label="Previously 'Unreached' verified / yr" value={<AnimatedNumber value={newlyReachedTouchpoints} format={num} />} />
               </div>
 
               <Button href="#book" icon={ArrowRight} className="relative mt-9 w-full sm:w-auto">
-                Get a custom ROI analysis
+                Request a Custom Portfolio Analysis
               </Button>
             </div>
           </Reveal>

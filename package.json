@@ -1,7 +1,7 @@
 {
-  "name": "vocorx-web",
+  "name": "vocols-web",
   "version": "1.0.0",
-  "description": "",
+  "description": "VocoLS — Autonomous Voice AI Insured Tracking for Life Settlements",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

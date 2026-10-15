@@ -1,154 +1,169 @@
 {
-  "medsync": [
+  "ls-persistence": [
     {
       "index": 0,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/medsync/line-0.mp3",
-      "bytes": 142986,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-persistence/line-0.mp3",
+      "bytes": 186870,
       "model": "eleven_v4"
     },
     {
       "index": 1,
       "speaker": "patient",
       "voiceId": "56AoDkrOh6qfVPDXZ7Pt",
-      "audioUrl": "/audio/scenarios/medsync/line-1.mp3",
-      "bytes": 58558,
+      "audioUrl": "/audio/scenarios/ls-persistence/line-1.mp3",
+      "bytes": 99517,
       "model": "eleven_v4"
     },
     {
       "index": 2,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/medsync/line-2.mp3",
-      "bytes": 181438,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-persistence/line-2.mp3",
+      "bytes": 148418,
       "model": "eleven_v4"
     },
     {
       "index": 3,
       "speaker": "patient",
       "voiceId": "56AoDkrOh6qfVPDXZ7Pt",
-      "audioUrl": "/audio/scenarios/medsync/line-3.mp3",
-      "bytes": 70261,
+      "audioUrl": "/audio/scenarios/ls-persistence/line-3.mp3",
+      "bytes": 103278,
       "model": "eleven_v4"
     },
     {
       "index": 4,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/medsync/line-4.mp3",
-      "bytes": 131701,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-persistence/line-4.mp3",
+      "bytes": 227830,
       "model": "eleven_v4"
     },
     {
       "index": 5,
       "speaker": "patient",
       "voiceId": "56AoDkrOh6qfVPDXZ7Pt",
-      "audioUrl": "/audio/scenarios/medsync/line-5.mp3",
-      "bytes": 49781,
+      "audioUrl": "/audio/scenarios/ls-persistence/line-5.mp3",
+      "bytes": 126684,
       "model": "eleven_v4"
     }
   ],
-  "chronic": [
+  "ls-followup": [
     {
       "index": 0,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/chronic/line-0.mp3",
-      "bytes": 95756,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-followup/line-0.mp3",
+      "bytes": 214874,
       "model": "eleven_v4"
     },
     {
       "index": 1,
       "speaker": "patient",
-      "audioUrl": "/audio/scenarios/chronic/line-1.mp3",
-      "bytes": 25539,
+      "voiceId": "ZoiZ8fuDWInAcwPXaVeq",
+      "audioUrl": "/audio/scenarios/ls-followup/line-1.mp3",
+      "bytes": 86978,
       "model": "eleven_v4"
     },
     {
       "index": 2,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/chronic/line-2.mp3",
-      "bytes": 131701,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-followup/line-2.mp3",
+      "bytes": 185198,
       "model": "eleven_v4"
     },
     {
       "index": 3,
       "speaker": "patient",
-      "audioUrl": "/audio/scenarios/chronic/line-3.mp3",
-      "bytes": 70261,
+      "voiceId": "ZoiZ8fuDWInAcwPXaVeq",
+      "audioUrl": "/audio/scenarios/ls-followup/line-3.mp3",
+      "bytes": 102025,
       "model": "eleven_v4"
     },
     {
       "index": 4,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/chronic/line-4.mp3",
-      "bytes": 189379,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-followup/line-4.mp3",
+      "bytes": 173914,
       "model": "eleven_v4"
     },
     {
       "index": 5,
       "speaker": "patient",
-      "audioUrl": "/audio/scenarios/chronic/line-5.mp3",
-      "bytes": 41839,
+      "voiceId": "ZoiZ8fuDWInAcwPXaVeq",
+      "audioUrl": "/audio/scenarios/ls-followup/line-5.mp3",
+      "bytes": 123758,
       "model": "eleven_v4"
     }
   ],
-  "specialty": [
+  "ls-cascade": [
     {
       "index": 0,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/specialty/line-0.mp3",
-      "bytes": 199410,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-cascade/line-0.mp3",
+      "bytes": 241623,
       "model": "eleven_v4"
     },
     {
       "index": 1,
       "speaker": "patient",
       "voiceId": "56AoDkrOh6qfVPDXZ7Pt",
-      "audioUrl": "/audio/scenarios/specialty/line-1.mp3",
-      "bytes": 56050,
+      "audioUrl": "/audio/scenarios/ls-cascade/line-1.mp3",
+      "bytes": 117489,
       "model": "eleven_v4"
     },
     {
       "index": 2,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/specialty/line-2.mp3",
-      "bytes": 109967,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-cascade/line-2.mp3",
+      "bytes": 171406,
       "model": "eleven_v4"
     },
     {
       "index": 3,
       "speaker": "patient",
       "voiceId": "56AoDkrOh6qfVPDXZ7Pt",
-      "audioUrl": "/audio/scenarios/specialty/line-3.mp3",
-      "bytes": 40586,
+      "audioUrl": "/audio/scenarios/ls-cascade/line-3.mp3",
+      "bytes": 104950,
       "model": "eleven_v4"
     },
     {
       "index": 4,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/specialty/line-4.mp3",
-      "bytes": 126685,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-cascade/line-4.mp3",
+      "bytes": 207350,
       "model": "eleven_v4"
     }
   ],
-  "escalation": [
+  "ls-escalation": [
     {
       "index": 0,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/escalation/line-0.mp3",
-      "bytes": 100772,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-escalation/line-0.mp3",
+      "bytes": 167644,
       "model": "eleven_v4"
     },
     {
       "index": 1,
       "speaker": "patient",
-      "audioUrl": "/audio/scenarios/escalation/line-1.mp3",
-      "bytes": 107459,
+      "voiceId": "ZoiZ8fuDWInAcwPXaVeq",
+      "audioUrl": "/audio/scenarios/ls-escalation/line-1.mp3",
+      "bytes": 98263,
       "model": "eleven_v4"
     },
     {
       "index": 2,
       "speaker": "agent",
-      "audioUrl": "/audio/scenarios/escalation/line-2.mp3",
-      "bytes": 157196,
+      "voiceId": "r5iFzIytiA1rzjhWFCjW",
+      "audioUrl": "/audio/scenarios/ls-escalation/line-2.mp3",
+      "bytes": 255834,
       "model": "eleven_v4"
     }
   ]

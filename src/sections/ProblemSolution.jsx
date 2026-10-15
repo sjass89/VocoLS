@@ -6,17 +6,17 @@ import SpotlightCard from '../components/SpotlightCard';
 import { Reveal, SectionHeading } from '../components/ui';
 
 const PROBLEMS = [
-  { icon: Flame, title: 'Front-desk burnout', text: 'Technicians juggle ringing phones, the drive-thru, and verification queues—turnover follows.' },
-  { icon: Clock, title: '4+ hours daily on manual MedSync calls', text: 'Unbillable dial-and-wait time that never touches a prescription.' },
-  { icon: PackageX, title: 'Abandoned prescriptions', text: 'Filled Rx sit in will-call bins until they are returned to stock.' },
-  { icon: CalendarX, title: 'Missed refills & adherence gaps', text: 'Patients lapse silently, eroding PDC scores, DIR outcomes, and revenue.' },
+  { icon: CalendarX, title: 'Arbitrary 3-to-4 attempt caps', text: 'Traditional tracking vendors give up after a handful of unanswered dials, marking policies "Unable to Reach" and leaving funds blind.' },
+  { icon: PackageX, title: 'Skipped follow-up questions', text: 'Human call centers rush scripts—failing to drill into new physicians, facility addresses, or hospitalization details when health changes occur.' },
+  { icon: Clock, title: 'Stale life expectancy & valuation data', text: 'Unreached insureds and incomplete medical updates delay Attending Physician Statements (APS) and distort portfolio IRR.' },
+  { icon: Flame, title: 'High per-attempt servicing overhead', text: 'Maintenance companies burn analyst hours playing phone tag with elderly insureds and secondary contacts across time zones.' },
 ];
 
 const SOLUTIONS = [
-  { icon: PhoneOutgoing, title: '100% outbound call automation', text: 'Every MedSync, refill, and pickup reminder dialed, retried, and documented.' },
-  { icon: RefreshCw, title: 'Bidirectional PMS / EHR integration', text: 'Reads due-lists and writes outcomes back to the patient profile in real time.' },
-  { icon: TrendingUp, title: 'Automated adherence tracking', text: 'PDC trends, gap alerts, and outreach outcomes surfaced per patient and per store.' },
-  { icon: Smile, title: 'Zero technician burnout', text: 'Staff stay at the counter for clinical and revenue-generating work.' },
+  { icon: PhoneOutgoing, title: 'Persistent "Call-Until-Reached" engine', text: 'Zero attempt caps. VocoLS intelligently varies call times, days, and designated contact cascades until a live voice is reached.' },
+  { icon: RefreshCw, title: 'Mandatory + dynamic follow-up questioning', text: 'Always asks 100% of required verification questions and dynamically branches into granular clinical and physician follow-ups.' },
+  { icon: TrendingUp, title: 'Instant APS & mortality event triggers', text: 'Automatically captures new doctor names, clinic locations, and hospital stays—or immediately escalates potential mortality events.' },
+  { icon: Smile, title: 'Direct portfolio & servicing write-back', text: 'Structured transcripts, audio recordings, and updated contact hierarchies sync directly into your policy administration system.' },
 ];
 
 export default function ProblemSolution() {
@@ -26,8 +26,8 @@ export default function ProblemSolution() {
         <SectionHeading
           eyebrow="The Platform"
           icon={Zap}
-          title={<>Your phones are a bottleneck. <span className="text-brand-gradient">VocoRx is the engine.</span></>}
-          description="Pharmacies lose thousands of staff hours a year to repetitive outreach. VocoRx turns that queue into an autonomous, auditable workflow."
+          title={<>Capped attempts leave portfolios blind. <span className="text-brand-gradient">VocoLS calls until reached.</span></>}
+          description="Life settlement maintenance companies, funds, and investors cannot afford 'No Contact' dispositions or half-answered health questionnaires. VocoLS turns insured outreach into a relentless, audit-grade workflow."
         />
 
         <div className="relative mt-16 grid gap-6 lg:grid-cols-2 lg:gap-10">
@@ -46,11 +46,11 @@ export default function ProblemSolution() {
             <div className="h-full rounded-[1.25rem] border border-rose-400/15 bg-slate-card/50 p-7 backdrop-blur-md sm:p-9">
               <div className="flex items-center justify-between">
                 <span className="inline-flex items-center gap-2 rounded-full border border-rose-400/20 bg-rose-400/[0.07] px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-rose-300">
-                  <TriangleAlert className="h-3.5 w-3.5" /> The Bottleneck
+                  <TriangleAlert className="h-3.5 w-3.5" /> Legacy Tracking
                 </span>
-                <span className="font-mono text-xs text-silver/60">status quo</span>
+                <span className="font-mono text-xs text-silver/60">3-attempt cap</span>
               </div>
-              <h3 className="mt-5 font-display text-2xl font-semibold text-white">Manual outreach doesn&apos;t scale.</h3>
+              <h3 className="mt-5 font-display text-2xl font-semibold text-white">Capped outreach leaves asset risk hidden.</h3>
               <ul className="mt-7 space-y-5">
                 {PROBLEMS.map((p) => (
                   <li key={p.title} className="flex gap-4">
@@ -66,10 +66,10 @@ export default function ProblemSolution() {
               </ul>
               <div className="mt-8 rounded-xl border border-white/5 bg-abyss/50 p-4">
                 <div className="flex items-center justify-between text-xs text-silver">
-                  <span>Daily phone time per store</span><span className="font-mono text-rose-300">4h 12m</span>
+                  <span>Policies closed as &ldquo;Unreached&rdquo; after 3 tries</span><span className="font-mono text-rose-300">34% unverified</span>
                 </div>
                 <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/5">
-                  <motion.div initial={{ width: 0 }} whileInView={{ width: '82%' }} viewport={{ once: true }} transition={{ duration: 1.4, ease: 'easeOut' }} className="h-full rounded-full bg-linear-to-r from-rose-500/70 to-rose-300" />
+                  <motion.div initial={{ width: 0 }} whileInView={{ width: '66%' }} viewport={{ once: true }} transition={{ duration: 1.4, ease: 'easeOut' }} className="h-full rounded-full bg-linear-to-r from-rose-500/70 to-rose-300" />
                 </div>
               </div>
             </div>
@@ -79,11 +79,11 @@ export default function ProblemSolution() {
             <SpotlightCard className="h-full p-7 shadow-[0_0_80px_-30px_rgba(0,229,255,0.4)] sm:p-9">
               <div className="flex items-center justify-between">
                 <span className="inline-flex items-center gap-2 rounded-full border border-brand-cyan/30 bg-brand-cyan/[0.08] px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-brand-cyan">
-                  <Bot className="h-3.5 w-3.5" /> The VocoRx Engine
+                  <Bot className="h-3.5 w-3.5" /> The VocoLS Engine
                 </span>
-                <span className="font-mono text-xs text-brand-teal">autonomous</span>
+                <span className="font-mono text-xs text-brand-teal">calls until reached</span>
               </div>
-              <h3 className="mt-5 font-display text-2xl font-semibold text-white">A digital employee that never puts anyone on hold.</h3>
+              <h3 className="mt-5 font-display text-2xl font-semibold text-white">Persistent AI that never stops at attempt #3.</h3>
               <ul className="mt-7 space-y-5">
                 {SOLUTIONS.map((s) => (
                   <li key={s.title} className="flex gap-4">
@@ -99,10 +99,10 @@ export default function ProblemSolution() {
               </ul>
               <div className="mt-8 rounded-xl border border-brand-cyan/10 bg-abyss/50 p-4">
                 <div className="flex items-center justify-between text-xs text-silver">
-                  <span>Daily phone time per store</span><span className="font-mono text-brand-teal">0h 18m</span>
+                  <span>Live contact &amp; full follow-up completion</span><span className="font-mono text-brand-teal">99.4% verified</span>
                 </div>
                 <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/5">
-                  <motion.div initial={{ width: 0 }} whileInView={{ width: '6%' }} viewport={{ once: true }} transition={{ duration: 1.4, ease: 'easeOut' }} className="h-full rounded-full bg-linear-to-r from-brand-teal to-brand-cyan" />
+                  <motion.div initial={{ width: 0 }} whileInView={{ width: '99%' }} viewport={{ once: true }} transition={{ duration: 1.4, ease: 'easeOut' }} className="h-full rounded-full bg-linear-to-r from-brand-teal to-brand-cyan" />
                 </div>
               </div>
             </SpotlightCard>

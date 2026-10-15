@@ -79,138 +79,133 @@ const VOICE_PROFILES = {
 
 // Scenarios with phonetic pronunciation enhancements for ElevenLabs V4
 // `text`: shown on screen in the transcript
-// `speechText`: sent to ElevenLabs for natural cadence & exact medical phonetic pronunciation
+// `speechText`: sent to ElevenLabs for natural cadence & exact pronunciation
 const SCENARIOS = [
   {
-    id: 'medsync',
-    title: 'MedSync Batch Call',
-    patientGender: 'female', // Sarah M.
+    id: 'ls-persistence',
+    title: 'Persistent Quarterly Check-In (Attempt #7)',
+    patientGender: 'female', // Evelyn M.
     lines: [
       {
         speaker: 'agent',
-        text: 'Hi Sarah, this is Ava calling from Main Street Pharmacy to confirm your thirty-day refill. For your privacy, can you confirm your date of birth?',
-        speechText: 'Hi Sarah! This is Ava calling from Main Street Pharmacy to confirm your thirty-day refill. For your privacy, can you please confirm your date of birth?',
+        text: 'Hi Evelyn, this is Ava calling on behalf of Apex Life Servicing for your quarterly policy wellness check-in. We tried reaching you earlier this week—is now a good time for a few quick questions?',
+        speechText: 'Hi Evelyn! This is Ava calling on behalf of Apex Life Servicing for your quarterly policy wellness check-in. We tried reaching you earlier this week—is now a good time for a few quick questions?',
       },
       {
         speaker: 'patient',
-        text: 'Sure, it is March fourteenth, nineteen sixty-two.',
-        speechText: 'Sure, it is March fourteenth, nineteen sixty-two.',
+        text: 'Oh yes, sorry I missed your earlier calls. I was visiting my daughter out of state. Go right ahead.',
+        speechText: 'Oh yes, sorry I missed your earlier calls. I was visiting my daughter out of state. Go right ahead.',
       },
       {
         speaker: 'agent',
-        text: 'Thank you. Your lisinopril and atorvastatin are both due. I can also sync your metformin so all three are ready on Thursday, October twenty-fourth. Does that work?',
-        // Phonetic respelling ensures medical perfection: lye-SIN-oh-pril and uh-TOR-va-stat-in
-        speechText: 'Thank you. Your lye-SIN-oh-pril and uh-TOR-va-stat-in are both due. I can also sync your met-FOR-min, so all three are ready on Thursday, October twenty-fourth. Does that work?',
+        text: 'Thank you, Evelyn! For your security, could you please confirm your date of birth and verify if you are still residing at 214 Maple Avenue?',
+        speechText: 'Thank you, Evelyn! For your security, could you please confirm your date of birth, and verify if you are still residing at two fourteen Maple Avenue?',
       },
       {
         speaker: 'patient',
-        text: 'Oh, that would be so much easier. Can I pick up after five?',
-        speechText: 'Oh, that would be so much easier! Can I pick up after five?',
+        text: 'Yes, March fourteenth, nineteen forty-eight, and yes, I am still at 214 Maple Avenue.',
+        speechText: 'Yes, March fourteenth, nineteen forty-eight, and yes, I am still at two fourteen Maple Avenue.',
       },
       {
         speaker: 'agent',
-        text: 'Absolutely. Pickup is set for five thirty on Thursday, and I just texted you a confirmation. Anything else I can help with?',
-        speechText: 'Absolutely! Pickup is set for five thirty on Thursday, and I just texted you a confirmation. Anything else I can help with today?',
+        text: 'Wonderful. Have you had any hospital stays, new diagnoses, or changes to your primary care physician, Dr. Alan Miller, in the past ninety days? And is your daughter Rachel still the best secondary contact for your file?',
+        speechText: 'Wonderful. Have you had any hospital stays, new diagnoses, or changes to your primary care physician, Doctor Alan Miller, in the past ninety days? And is your daughter Rachel still the best secondary contact for your file?',
       },
       {
         speaker: 'patient',
-        text: 'No, that is everything. Thank you!',
-        speechText: 'No, that is everything. Thank you!',
+        text: 'No hospital visits at all, I still see Dr. Miller every six months, and yes, Rachel’s number is still the best backup.',
+        speechText: 'No hospital visits at all, I still see Doctor Miller every six months, and yes, Rachel’s number is still the best backup.',
       },
     ],
   },
   {
-    id: 'chronic',
-    title: 'Chronic Care Check-in',
-    patientGender: 'male', // James R.
+    id: 'ls-followup',
+    title: 'Hospitalization & Dynamic Follow-Up Drill',
+    patientGender: 'male', // Arthur R.
     lines: [
       {
         speaker: 'agent',
-        text: 'Hi James, this is Ava from Riverside Health Pharmacy with your monthly check-in. Is now a good time?',
-        speechText: 'Hi James! This is Ava from Riverside Health Pharmacy with your monthly check-in. Is now a good time?',
+        text: 'Hello Arthur, this is Ava calling from Meridian Policy Servicing for your scheduled health and wellness check-in. Have you experienced any hospital admissions, emergency room visits, or new specialist referrals since July?',
+        speechText: 'Hello Arthur! This is Ava calling from Meridian Policy Servicing for your scheduled health and wellness check-in. Have you experienced any hospital admissions, emergency room visits, or new specialist referrals since July?',
       },
       {
         speaker: 'patient',
-        text: 'Yeah, I have a minute.',
-        speechText: 'Yeah, I have a minute.',
+        text: 'Yeah, actually I was in the hospital for three days last month because of some shortness of breath.',
+        speechText: 'Yeah, actually I was in the hospital for three days last month because of some shortness of breath.',
       },
       {
         speaker: 'agent',
-        text: 'Great. Our records show your Jardiance refill is about ten days overdue. Have you been able to take it as prescribed?',
-        // JAR-dee-anss for Jardiance
-        speechText: 'Great. Our records show your JAR-dee-anss refill is about ten days overdue. Have you been able to take it as prescribed?',
+        text: 'I am glad you are back home, Arthur. To make sure our records are complete, which hospital were you admitted to, and what specific diagnosis or condition did the attending doctors identify?',
+        speechText: 'I am glad you are back home, Arthur. To make sure our records are complete, which hospital were you admitted to, and what specific diagnosis or condition did the attending doctors identify?',
       },
       {
         speaker: 'patient',
-        text: 'Honestly, I have been stretching it out. It got expensive this year.',
-        speechText: 'Honestly, I have been stretching it out. It got expensive this year.',
+        text: 'It was Sarasota Memorial Hospital. They said I had mild atrial fibrillation and fluid buildup.',
+        speechText: 'It was Sarasota Memorial Hospital. They said I had mild ay-tree-uhl fib-rih-LAY-shun and fluid buildup.',
       },
       {
         speaker: 'agent',
-        text: 'I understand, and thank you for telling me. You may qualify for a manufacturer copay card that could lower your cost significantly. Would you like me to apply it and have your pharmacist follow up?',
-        speechText: 'I understand, and thank you for telling me. You may qualify for a manufacturer co-pay card that could lower your cost significantly. Would you like me to apply it and have your pharmacist follow up?',
+        text: 'Thank you for sharing that. One last follow-up: were you referred to a new cardiologist, and did they prescribe any new daily medications or schedule a follow-up procedure?',
+        speechText: 'Thank you for sharing that. One last follow-up: were you referred to a new cardiologist, and did they prescribe any new daily medications or schedule a follow-up procedure?',
       },
       {
         speaker: 'patient',
-        text: 'Yes, please. That would really help.',
-        speechText: 'Yes, please. That would really help!',
+        text: 'Yes, I am seeing Dr. Sanjay Patel at Gulf Coast Cardiology now, and he put me on Eliquis and a low-dose diuretic.',
+        speechText: 'Yes, I am seeing Doctor Sanjay Patel at Gulf Coast Cardiology now, and he put me on EL-ih-kwiss and a low-dose diuretic.',
       },
     ],
   },
   {
-    id: 'specialty',
-    title: 'Specialty Refill Confirmation',
-    patientGender: 'female', // Maria L.
+    id: 'ls-cascade',
+    title: 'Designated Contact Cascade Outreach',
+    patientGender: 'female', // Claire L.
     lines: [
       {
         speaker: 'agent',
-        text: 'Hello Maria, this is Ava from Apex Specialty Pharmacy. Your next Humira shipment is ready to schedule. First, have you had any new infections, fevers, or hospital visits since your last dose?',
-        // hyoo-MEER-uh for Humira
-        speechText: 'Hello Maria! This is Ava from Apex Specialty Pharmacy. Your next hyoo-MEER-uh shipment is ready to schedule. First, have you had any new infections, fevers, or hospital visits since your last dose?',
+        text: 'Hello Claire, this is Ava calling from Vanguard Life Maintenance. You are listed as the authorized designated contact for your father, Walter L., and we have been unable to reach his home line. Are you able to provide a brief update on how Walter is doing?',
+        speechText: 'Hello Claire! This is Ava calling from Vanguard Life Maintenance. You are listed as the authorized designated contact for your father, Walter, and we have been unable to reach his home line. Are you able to provide a brief update on how Walter is doing?',
       },
       {
         speaker: 'patient',
-        text: 'No, nothing like that. I have been feeling good.',
-        speechText: 'No, nothing like that. I have been feeling good.',
+        text: 'Hi, yes—Dad had a hip replacement three weeks ago, so he is temporarily staying at a rehabilitation center.',
+        speechText: 'Hi, yes—Dad had a hip replacement three weeks ago, so he is temporarily staying at a rehabilitation center.',
       },
       {
         speaker: 'agent',
-        text: 'Wonderful. It ships cold-chain and needs a signature. Can someone be home this Wednesday between ten and two?',
-        speechText: 'Wonderful! It ships cold-chain and needs a signature. Can someone be home this Wednesday between ten and two?',
+        text: 'Thank you for letting us know, and we wish him a smooth recovery. Could you share the name and city of the rehabilitation facility, as well as the orthopedic surgeon overseeing his care?',
+        speechText: 'Thank you for letting us know, and we wish him a smooth recovery. Could you share the name and city of the rehabilitation facility, as well as the orthopedic surgeon overseeing his care?',
       },
       {
         speaker: 'patient',
-        text: 'Wednesday works. I work from home.',
-        speechText: 'Wednesday works. I work from home.',
+        text: 'He is at Pinecrest Skilled Nursing in Scottsdale, and Dr. Rebecca Vance at Mayo Clinic performed the surgery.',
+        speechText: 'He is at Pinecrest Skilled Nursing in Scottsdale, and Doctor Rebecca Vance at Mayo Clinic performed the surgery.',
       },
       {
         speaker: 'agent',
-        text: 'Perfect. Your delivery is confirmed for Wednesday, with a twenty-five dollar copay on file. You will get a tracking text this evening.',
-        speechText: 'Perfect! Your delivery is confirmed for Wednesday, with a twenty-five dollar co-pay on file. You will get a tracking text this evening.',
+        text: 'Got it—Pinecrest Skilled Nursing in Scottsdale and Dr. Rebecca Vance. Lastly, does he have an expected discharge date back to his primary residence, or should we continue checking in with you directly?',
+        speechText: 'Got it—Pinecrest Skilled Nursing in Scottsdale and Doctor Rebecca Vance. Lastly, does he have an expected discharge date back to his primary residence, or should we continue checking in with you directly?',
       },
     ],
   },
   {
-    id: 'escalation',
-    title: 'Clinical Escalation Triage',
-    patientGender: 'male', // Robert K.
+    id: 'ls-escalation',
+    title: 'Sensitive Event & Claims Triage',
+    patientGender: 'male', // David K.
     lines: [
       {
         speaker: 'agent',
-        text: 'Hi Robert, this is Ava from Main Street Pharmacy. Your warfarin refill is ready for pickup today.',
-        // WAR-fer-in for Warfarin
-        speechText: 'Hi Robert! This is Ava from Main Street Pharmacy. Your WAR-fer-in refill is ready for pickup today.',
+        text: 'Hello, this is Ava calling from Apex Life Servicing regarding our routine policy check-in for Robert K. Am I speaking with Robert or his designated contact, David?',
+        speechText: 'Hello! This is Ava calling from Apex Life Servicing regarding our routine policy check-in for Robert. Am I speaking with Robert, or his designated contact, David?',
       },
       {
         speaker: 'patient',
-        text: 'Thanks. Quick question though, my dentist just prescribed me ibuprofen. Is that okay to take with it?',
-        // eye-byoo-PRO-fen for Ibuprofen
-        speechText: 'Thanks. Quick question though, my dentist just prescribed me eye-byoo-PRO-fen. Is that okay to take with it?',
+        text: 'This is his son, David. I am sorry to tell you this, but my father passed away last Tuesday.',
+        speechText: 'This is his son, David. I am sorry to tell you this, but my father passed away last Tuesday.',
       },
       {
         speaker: 'agent',
-        text: 'That is an important question, and our pharmacist should answer it directly. I am transferring you now and sharing a summary so you will not need to repeat yourself.',
-        speechText: 'That is an important question, and our pharmacist should answer it directly. I am transferring you now and sharing a summary so you will not need to repeat yourself.',
+        text: 'David, I am so very sorry for your loss, and please accept our deepest condolences. So you do not have to navigate an automated call, I am connecting you right now with our Senior Claims Specialist who will gently assist your family with the next steps.',
+        speechText: 'David, I am so very sorry for your loss, and please accept our deepest condolences. So you do not have to navigate an automated call, I am connecting you right now with our Senior Claims Specialist, who will gently assist your family with the next steps.',
       },
     ],
   },
@@ -272,7 +267,7 @@ async function main() {
   const targetScenarioId = targetScenarioArg !== -1 ? process.argv[targetScenarioArg + 1] : null;
   const onlyPatient = process.argv.includes('--only-patient');
 
-  console.log('--- VocoRx ElevenLabs Audio Generator (Model: eleven_v4) ---');
+  console.log('--- VocoLS ElevenLabs Audio Generator (Model: eleven_v4) ---');
   console.log('Using API Key:', API_KEY ? `${API_KEY.slice(0, 6)}...${API_KEY.slice(-4)}` : 'MISSING');
   console.log(`Agent Profile: Lucy (${VOICE_PROFILES.agent.voiceId})`);
   console.log(`Male Patient Profile: Josh (${VOICE_PROFILES.patient_male.voiceId})`);

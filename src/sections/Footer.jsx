@@ -18,13 +18,13 @@ export default function Footer({ onOpenLegal }) {
       links: NAV.map((n) => ({ label: n.label, href: n.href, isLegal: false })),
     },
     {
-      title: 'Enterprise',
+      title: 'Solutions',
       links: [
-        { label: 'Book Enterprise Demo', href: '#book', isLegal: false },
+        { label: 'Maintenance Companies', href: '#book', isLegal: false },
+        { label: 'Life Settlement Funds', href: '#book', isLegal: false },
+        { label: 'Institutional Investors', href: '#book', isLegal: false },
         { label: 'Audio Playground', href: '#demo', isLegal: false },
-        { label: 'Integrations', href: '#medsync', isLegal: false },
-        { label: 'Partner Program', href: '#book', isLegal: false },
-        { label: 'Contact Sales', href: 'mailto:sales@vocorx.ai', isLegal: false },
+        { label: 'Contact Sales', href: 'mailto:sales@vocols.ai', isLegal: false },
       ],
     },
     {
@@ -46,10 +46,10 @@ export default function Footer({ onOpenLegal }) {
           <div>
             <Logo size="md" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-silver">
-              The autonomous Voice AI digital employee for retail, compounding, and specialty pharmacies.
+              The autonomous Voice AI insured tracking engine for life settlement maintenance companies, institutional funds, and investors—calling until someone is reached and asking every required follow-up question.
             </p>
             <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-brand-teal/25 bg-brand-teal/[0.06] px-3 py-1.5 text-xs text-brand-teal">
-              <ShieldCheck className="h-3.5 w-3.5" /> HIPAA-ready · BAA available
+              <ShieldCheck className="h-3.5 w-3.5" /> HIPAA &amp; State Privacy Compliant · BAA Available
             </div>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
@@ -87,9 +87,7 @@ export default function Footer({ onOpenLegal }) {
 
         <div className="mt-14 border-t border-white/5 pt-8 text-xs leading-relaxed text-silver/60">
           <p>
-            VocoRx is a product of VitalGuard LLC. VocoRx does not provide medical advice, diagnosis, or treatment; clinical
-            questions are escalated to licensed pharmacists. All product names, logos, and brands referenced are property of their respective owners.
-            Performance metrics shown are illustrative and vary by deployment.
+            VocoLS is a product of VitalGuard LLC. VocoLS provides administrative insured tracking, contact verification, and health questionnaire automation for authorized life settlement servicers, providers, funds, and institutional investors in accordance with applicable state life settlement privacy laws and executed HIPAA authorizations. Performance metrics shown are illustrative and vary by portfolio.
           </p>
           <div className="mt-6 flex flex-col justify-between gap-3 sm:flex-row">
             <p>© {year} VitalGuard LLC. All rights reserved.</p>

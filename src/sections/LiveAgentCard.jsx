@@ -6,19 +6,19 @@ import Waveform from '../components/Waveform';
 import { LiveDot } from '../components/ui';
 
 const SCRIPT = [
-  { speaker: 'agent', text: 'Hi Sarah, calling from Main St Pharmacy to confirm your 30-day refill... For your privacy, can you confirm your date of birth?' },
-  { speaker: 'patient', text: 'Sure — March 14th, 1962.' },
-  { speaker: 'agent', text: 'Thank you! Your lisinopril and atorvastatin are due. I can sync your metformin too, so all three are ready Thursday the 24th. Does that work?' },
-  { speaker: 'patient', text: "That's perfect. Can I pick up after 5?" },
-  { speaker: 'agent', text: "Done — pickup is set for 5:30 PM Thursday, and I've texted you a confirmation." },
-  { speaker: 'system', text: 'PMS updated · 3 Rx synced · Pickup 10/24 · 5:30 PM' },
+  { speaker: 'agent', text: 'Hi Arthur, calling for your quarterly policy check-in. First, can you confirm your date of birth and current residential address?' },
+  { speaker: 'patient', text: 'Yes — June 12th, 1946, still at 418 Oakwood Drive in Sarasota.' },
+  { speaker: 'agent', text: 'Thank you. Have you had any hospital stays, ER visits, or new specialist appointments since we spoke in July?' },
+  { speaker: 'patient', text: 'I actually spent two nights at Sarasota Memorial last month and saw a cardiologist.' },
+  { speaker: 'agent', text: 'I hope you are feeling better. To update your file accurately, what was the cardiologist’s name, what diagnosis did they share, and were any new medications or follow-up procedures scheduled?' },
+  { speaker: 'system', text: 'Attempt #7 Reached · Hospitalization + Dr. Patel (Cardiology) logged · APS flagged' },
 ];
 
 const TASKS = [
-  { label: 'Identity verified (DOB)', at: 2 },
-  { label: '3 prescriptions synchronized', at: 3 },
-  { label: 'Pickup scheduled · Thu 10/24', at: 5 },
-  { label: 'PMS write-back complete', at: 6 },
+  { label: 'Identity & address verified', at: 2 },
+  { label: 'Hospitalization detected', at: 4 },
+  { label: 'Follow-up MD & Rx captured', at: 5 },
+  { label: 'Servicer & APS queue updated', at: 6 },
 ];
 
 const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
@@ -69,9 +69,9 @@ export default function LiveAgentCard() {
             </div>
             <div>
               <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-cyan">
-                <LiveDot /> Live Agent Simulation
+                <LiveDot /> Persistent Tracking Simulation
               </p>
-              <p className="text-sm text-white">Outbound MedSync · Sarah M. · ***-4821</p>
+              <p className="text-sm text-white">Attempt #7 (Reached) · Insured: Arthur H. · Pol #LS-9042</p>
             </div>
           </div>
           <span className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-xs text-white tabular-nums">{fmt(seconds)}</span>
@@ -82,9 +82,9 @@ export default function LiveAgentCard() {
           <div className="mb-2 flex items-center justify-between text-[11px] uppercase tracking-wider">
             <span className={`flex items-center gap-1.5 ${speaking ? 'text-white' : 'text-silver/60'}`}>
               {line.speaker === 'patient' ? <User className="h-3.5 w-3.5" /> : <Bot className="h-3.5 w-3.5 text-brand-cyan" />}
-              {speaking ? (line.speaker === 'agent' ? 'VocoRx Agent speaking' : 'Patient speaking') : 'Listening…'}
+              {speaking ? (line.speaker === 'agent' ? 'VocoLS Agent speaking' : 'Insured speaking') : 'Listening…'}
             </span>
-            <span className="text-silver/60">16 kHz · Opus</span>
+            <span className="text-silver/60">Dial-Until-Reached · HD Voice</span>
           </div>
           <Waveform active={speaking} speaker={line.speaker} bars={44} className="h-14" />
         </div>
@@ -119,9 +119,9 @@ export default function LiveAgentCard() {
 
         {/* metrics */}
         <div className="mt-4 grid grid-cols-3 divide-x divide-brand-cyan/10 rounded-xl border border-brand-cyan/10 bg-abyss/50">
-          <Metric icon={Gauge} label="Latency" value={<><span className="text-brand-cyan">{latency}</span>ms</>} sub="< 600ms target" />
-          <Metric icon={ShieldCheck} label="Compliance" value="HIPAA" sub="PHI encrypted" />
-          <Metric icon={Target} label="Task Completion" value="99.2%" sub="trailing 30 days" />
+          <Metric icon={Gauge} label="Persistence" value={<><span className="text-brand-cyan">∞</span> Dials</>} sub="Until live contact" />
+          <Metric icon={ShieldCheck} label="Question Depth" value="100%" sub="Core + Follow-ups" />
+          <Metric icon={Target} label="Reach Rate" value="99.4%" sub="Insured / Contacts" />
         </div>
       </SpotlightCard>
 
@@ -132,8 +132,8 @@ export default function LiveAgentCard() {
         transition={{ delay: 1.1 }}
         className="glass absolute -right-3 -top-5 hidden animate-float rounded-xl px-3.5 py-2.5 text-xs sm:block lg:-right-8"
       >
-        <p className="text-silver">Staff hours saved today</p>
-        <p className="font-display text-lg font-semibold text-white">+4.2 hrs</p>
+        <p className="text-silver">Unreached policies eliminated</p>
+        <p className="font-display text-lg font-semibold text-white">Zero Caps</p>
       </motion.div>
       <motion.div
         initial={{ opacity: 0, x: -20 }}
@@ -143,8 +143,8 @@ export default function LiveAgentCard() {
       >
         <span className="grid h-7 w-7 place-items-center rounded-lg bg-brand-teal/15"><CircleCheck className="h-4 w-4 text-brand-teal" /></span>
         <div>
-          <p className="text-silver">Calls completed</p>
-          <p className="font-semibold text-white">1,284 this week</p>
+          <p className="text-silver">Follow-up drills completed</p>
+          <p className="font-semibold text-white">100% verified</p>
         </div>
       </motion.div>
     </div>
@@ -174,7 +174,7 @@ function Bubble({ line, faded, cursor }) {
           }`}
         >
           <span className={`mb-0.5 block text-[10px] font-semibold uppercase tracking-wider ${isAgent ? 'text-brand-cyan' : 'text-silver'}`}>
-            {isAgent ? 'VocoRx Agent' : 'Sarah'}
+            {isAgent ? 'VocoLS Agent' : 'Arthur (Insured)'}
           </span>
           {line.text}
           {cursor && <span className="ml-0.5 inline-block h-3.5 w-[2px] translate-y-0.5 animate-pulse bg-brand-cyan" />}
