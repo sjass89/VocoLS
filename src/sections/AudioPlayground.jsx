@@ -46,7 +46,7 @@ export default function AudioPlayground({ autoplayToken }) {
   const isPlaying = pb.status === 'playing';
 
   return (
-    <section id="demo" className="relative py-24 sm:py-32">
+    <section id="demo" className="relative overflow-hidden py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-6">
         <SectionHeading
           eyebrow="Audio Playground"
@@ -55,9 +55,9 @@ export default function AudioPlayground({ autoplayToken }) {
           description="Toggle between live tracking scenarios to hear how our AI reaches insureds after multiple attempts, drills into medical follow-up questions, cascades to designated contacts, and escalates claims."
         />
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-[minmax(0,360px)_1fr]">
+        <div className="mt-16 grid gap-6 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)]">
           {/* scenario list */}
-          <Reveal className="flex flex-col gap-3" y={16}>
+          <Reveal className="flex min-w-0 flex-col gap-3" y={16}>
             {SCENARIOS.map((s) => {
               const active = s.id === activeId;
               return (
@@ -66,7 +66,7 @@ export default function AudioPlayground({ autoplayToken }) {
                   onClick={() => select(s)}
                   whileHover={{ x: 4 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`group relative flex w-full items-center gap-4 overflow-hidden rounded-2xl border p-4 text-left transition-colors ${
+                  className={`group relative flex w-full min-w-0 items-center gap-3.5 overflow-hidden rounded-2xl border p-4 text-left transition-colors sm:gap-4 ${
                     active ? 'border-brand-cyan/50 bg-brand-cyan/[0.08]' : 'border-white/[0.06] bg-slate-card/50 hover:border-brand-cyan/30'
                   }`}
                 >
@@ -75,7 +75,7 @@ export default function AudioPlayground({ autoplayToken }) {
                     <s.icon className={`h-5 w-5 ${active ? 'text-brand-cyan' : 'text-silver group-hover:text-brand-cyan'}`} />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block font-medium text-white">{s.title}</span>
+                    <span className="block truncate font-medium text-white">{s.title}</span>
                     <span className="block truncate text-xs text-silver">{s.subtitle}</span>
                   </span>
                   <span className="shrink-0">
@@ -94,18 +94,18 @@ export default function AudioPlayground({ autoplayToken }) {
           </Reveal>
 
           {/* player */}
-          <Reveal delay={0.1} y={16}>
-            <SpotlightCard className="p-5 sm:p-7">
+          <Reveal delay={0.1} y={16} className="min-w-0">
+            <SpotlightCard className="min-w-0 p-5 sm:p-7">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-cyan">
                     {isPlaying ? <LiveDot /> : <span className="h-2 w-2 rounded-full bg-silver/40" />}
                     {isPlaying ? 'Call in progress' : pb.status === 'done' ? 'Call completed' : pb.status === 'paused' ? 'Paused' : 'Ready'}
                   </p>
-                  <h3 className="mt-1 font-display text-xl font-semibold text-white">{scenario.title}</h3>
-                  <p className="text-sm text-silver">{scenario.servicer} → {scenario.insured}</p>
+                  <h3 className="mt-1 font-display text-lg font-semibold text-white sm:text-xl">{scenario.title}</h3>
+                  <p className="truncate text-sm text-silver">{scenario.servicer} → {scenario.insured}</p>
                 </div>
-                <div className="flex items-center gap-2 text-xs">
+                <div className="flex flex-wrap items-center gap-2 text-xs">
                   <span className="rounded-full border border-brand-cyan/40 bg-brand-cyan/10 px-2.5 py-1 text-brand-cyan">
                     Dynamic Follow-Up AI
                   </span>
@@ -116,28 +116,28 @@ export default function AudioPlayground({ autoplayToken }) {
               {/* visualizer */}
               <div className="relative mt-6 overflow-hidden rounded-2xl border border-brand-cyan/10 bg-abyss/70 px-4 py-6 sm:px-6">
                 <div aria-hidden className="bg-grid absolute inset-0 opacity-60" />
-                <div className="relative mb-3 flex items-center justify-between text-[11px] uppercase tracking-wider">
-                  <span className={`flex items-center gap-1.5 ${speaking ? 'text-white' : 'text-silver/60'}`}>
-                    {pb.speaker === 'patient' ? <User className="h-3.5 w-3.5" /> : <Bot className="h-3.5 w-3.5 text-brand-cyan" />}
-                    {speaking ? (pb.speaker === 'agent' ? 'VocoLS Agent' : 'Insured / Contact') : pb.speaker === 'system' ? 'Writing to Servicer DB…' : 'Idle'}
+                <div className="relative mb-3 flex items-center justify-between gap-2 text-[11px] uppercase tracking-wider">
+                  <span className={`flex min-w-0 items-center gap-1.5 truncate ${speaking ? 'text-white' : 'text-silver/60'}`}>
+                    {pb.speaker === 'patient' ? <User className="h-3.5 w-3.5 shrink-0" /> : <Bot className="h-3.5 w-3.5 shrink-0 text-brand-cyan" />}
+                    <span className="truncate">{speaking ? (pb.speaker === 'agent' ? 'VocoLS Agent' : 'Insured / Contact') : pb.speaker === 'system' ? 'Writing to Servicer DB…' : 'Idle'}</span>
                   </span>
-                  <span className="font-mono text-silver/60 tabular-nums">{fmt(pb.elapsed)} / {fmt(totalSec)}</span>
+                  <span className="shrink-0 font-mono text-silver/60 tabular-nums">{fmt(pb.elapsed)} / {fmt(totalSec)}</span>
                 </div>
                 <Waveform active={!!speaking} speaker={pb.speaker || 'agent'} bars={72} gap={3} className="relative h-28 sm:h-32" />
               </div>
 
               {/* controls */}
-              <div className="mt-5 flex items-center gap-4">
+              <div className="mt-5 flex items-center gap-3 sm:gap-4">
                 <motion.button
                   onClick={toggle}
                   whileHover={{ scale: 1.06 }}
                   whileTap={{ scale: 0.94 }}
                   aria-label={isPlaying ? 'Pause' : 'Play'}
-                  className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-linear-to-br from-brand-teal to-brand-cyan text-midnight shadow-[0_0_28px_rgba(0,229,255,0.45)] transition-shadow hover:shadow-[0_0_44px_rgba(0,229,255,0.7)]"
+                  className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-linear-to-br from-brand-teal to-brand-cyan text-midnight shadow-[0_0_28px_rgba(0,229,255,0.45)] transition-shadow hover:shadow-[0_0_44px_rgba(0,229,255,0.7)] sm:h-14 sm:w-14"
                 >
                   {isPlaying ? <Pause className="h-6 w-6" fill="currentColor" /> : <Play className="ml-0.5 h-6 w-6" fill="currentColor" />}
                 </motion.button>
-                <div className="flex-1">
+                <div className="min-w-0 flex-1">
                   <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
                     <motion.div style={{ scaleX: pb.progress }} className="h-full origin-left rounded-full bg-linear-to-r from-brand-teal to-brand-cyan" />
                   </div>
@@ -147,24 +147,24 @@ export default function AudioPlayground({ autoplayToken }) {
                   whileTap={{ scale: 0.9 }}
                   onClick={() => { stop(); }}
                   aria-label="Reset"
-                  className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-silver transition hover:border-brand-cyan/50 hover:text-white"
+                  className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 text-silver transition hover:border-brand-cyan/50 hover:text-white"
                 >
                   <RotateCcw className="h-4 w-4" />
-                                </motion.button>
+                </motion.button>
                 <motion.button
                   whileTap={{ scale: 0.9 }}
                   onClick={() => pb.supported && pb.setMuted((m) => !m)}
                   disabled={!pb.supported}
                   aria-label={pb.muted ? 'Unmute' : 'Mute'}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-silver transition hover:border-brand-cyan/50 hover:text-white disabled:opacity-40"
+                  className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 text-silver transition hover:border-brand-cyan/50 hover:text-white disabled:opacity-40"
                 >
                   {pb.muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
                 </motion.button>
               </div>
 
               {/* transcript + outcomes */}
-              <div className="mt-6 grid gap-4 md:grid-cols-[1fr_220px]">
-                <div ref={transcriptRef} className="thin-scroll h-64 space-y-3 overflow-y-auto rounded-xl border border-white/5 bg-abyss/40 p-4" aria-live="polite">
+              <div className="mt-6 grid gap-4 md:grid-cols-[minmax(0,1fr)_220px]">
+                <div ref={transcriptRef} className="thin-scroll h-64 min-w-0 space-y-3 overflow-y-auto rounded-xl border border-white/5 bg-abyss/40 p-4" aria-live="polite">
                   {visible.length === 0 && (
                     <div className="grid h-full place-items-center text-center text-sm text-silver/60">
                       <div>
@@ -202,7 +202,7 @@ export default function AudioPlayground({ autoplayToken }) {
                   </AnimatePresence>
                 </div>
 
-                <div className="rounded-xl border border-white/5 bg-abyss/40 p-4">
+                <div className="min-w-0 rounded-xl border border-white/5 bg-abyss/40 p-4">
                   <p className="text-[11px] font-semibold uppercase tracking-wider text-silver/70">Tracking outcomes</p>
                   <ul className="mt-3 space-y-2.5">
                     {scenario.outcomes.map((o, i) => {

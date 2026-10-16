@@ -12,18 +12,18 @@ function PersistenceVisual() {
   return (
     <div className="space-y-2">
       {attempts.map((r, i) => (
-        <div key={r.name} className="flex items-center gap-3 text-xs">
-          <PhoneCall className="h-3.5 w-3.5 text-brand-cyan" />
-          <span className="w-36 truncate text-white">{r.name}</span>
-          <span className="font-mono text-silver/50 line-through">{r.from}</span>
+        <div key={r.name} className="flex min-w-0 items-center gap-2 text-xs sm:gap-3">
+          <PhoneCall className="h-3.5 w-3.5 shrink-0 text-brand-cyan" />
+          <span className="min-w-0 flex-1 truncate text-white sm:w-36 sm:flex-none">{r.name}</span>
+          <span className="shrink-0 font-mono text-[11px] text-silver/50 line-through sm:text-xs">{r.from}</span>
           <motion.span
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 + i * 0.15, duration: 0.6 }}
-            className="h-px flex-1 origin-left bg-linear-to-r from-brand-cyan/10 to-brand-cyan/60"
+            className="hidden h-px flex-1 origin-left bg-linear-to-r from-brand-cyan/10 to-brand-cyan/60 sm:block"
           />
-          <span className="rounded-md border border-brand-teal/30 bg-brand-teal/10 px-1.5 py-0.5 font-mono text-brand-teal">
+          <span className="shrink-0 rounded-md border border-brand-teal/30 bg-brand-teal/10 px-1.5 py-0.5 font-mono text-[11px] text-brand-teal sm:text-xs">
             {i === 2 ? 'REACHED' : 'Retry'}
           </span>
         </div>
@@ -46,12 +46,12 @@ function FollowUpVisual() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 + i * 0.2 }}
-          className="flex items-center gap-3 rounded-lg border border-white/5 bg-white/[0.03] px-3 py-2"
+          className="flex min-w-0 items-center gap-3 rounded-lg border border-white/5 bg-white/[0.03] px-3 py-2"
         >
-          <BellRing className="h-3.5 w-3.5 text-brand-cyan" />
-          <div className="min-w-0">
+          <BellRing className="h-3.5 w-3.5 shrink-0 text-brand-cyan" />
+          <div className="min-w-0 flex-1">
             <p className="truncate text-xs text-white">{it.t}</p>
-            <p className="text-[10px] text-silver/70">{it.s}</p>
+            <p className="truncate text-[10px] text-silver/70">{it.s}</p>
           </div>
         </motion.div>
       ))}
@@ -61,20 +61,20 @@ function FollowUpVisual() {
 
 function TriageVisual() {
   return (
-    <div className="flex items-center justify-between gap-2 text-xs">
-      <div className="flex flex-col items-center gap-1.5">
+    <div className="flex min-w-0 items-center justify-between gap-2 pb-2 text-xs">
+      <div className="flex shrink-0 flex-col items-center gap-1.5">
         <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-cyan/10 ring-1 ring-brand-cyan/30"><Bot className="h-5 w-5 text-brand-cyan" /></span>
         <span className="text-silver">VocoLS AI</span>
       </div>
-      <div className="relative h-px flex-1 bg-brand-cyan/20">
+      <div className="relative h-px min-w-0 flex-1 bg-brand-cyan/20">
         <motion.span
           animate={{ left: ['0%', '100%'] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute -top-1 h-2 w-2 -translate-x-1/2 rounded-full bg-brand-cyan shadow-[0_0_12px_#00E5FF]"
         />
-        <span className="absolute left-1/2 top-2 -translate-x-1/2 whitespace-nowrap rounded bg-amber-400/10 px-1.5 py-0.5 text-[10px] text-amber-300">Contact Cascade / Alert</span>
+        <span className="absolute left-1/2 top-2 -translate-x-1/2 whitespace-nowrap rounded bg-amber-400/10 px-1.5 py-0.5 text-[10px] text-amber-300">Cascade / Alert</span>
       </div>
-      <div className="flex flex-col items-center gap-1.5">
+      <div className="flex shrink-0 flex-col items-center gap-1.5">
         <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-teal/10 ring-1 ring-brand-teal/30"><UserRound className="h-5 w-5 text-brand-teal" /></span>
         <span className="text-silver">Case Mgr</span>
       </div>
@@ -84,17 +84,17 @@ function TriageVisual() {
 
 function PortfolioSyncVisual() {
   return (
-    <div className="flex items-center justify-between gap-3 text-xs">
-      <div className="flex-1 rounded-lg border border-white/5 bg-white/[0.03] px-3 py-2">
-        <p className="text-[10px] uppercase tracking-wider text-silver/70">Servicer DB</p>
-        <p className="font-mono text-white">Pol #LS-9042 · due</p>
+    <div className="flex min-w-0 items-center justify-between gap-2 text-xs sm:gap-3">
+      <div className="min-w-0 flex-1 rounded-lg border border-white/5 bg-white/[0.03] px-2.5 py-2 sm:px-3">
+        <p className="truncate text-[10px] uppercase tracking-wider text-silver/70">Servicer DB</p>
+        <p className="truncate font-mono text-white">Pol #LS-9042 · due</p>
       </div>
-      <motion.div animate={{ rotate: [0, 180, 360] }} transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}>
+      <motion.div className="shrink-0" animate={{ rotate: [0, 180, 360] }} transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}>
         <ArrowRightLeft className="h-4 w-4 text-brand-cyan" />
       </motion.div>
-      <div className="flex-1 rounded-lg border border-brand-cyan/20 bg-brand-cyan/[0.06] px-3 py-2">
-        <p className="text-[10px] uppercase tracking-wider text-brand-cyan/80">VocoLS</p>
-        <p className="font-mono text-white">verified · APS ready</p>
+      <div className="min-w-0 flex-1 rounded-lg border border-brand-cyan/20 bg-brand-cyan/[0.06] px-2.5 py-2 sm:px-3">
+        <p className="truncate text-[10px] uppercase tracking-wider text-brand-cyan/80">VocoLS</p>
+        <p className="truncate font-mono text-white">verified · APS ready</p>
       </div>
     </div>
   );
@@ -137,7 +137,7 @@ const CAPABILITIES = [
 
 export default function Capabilities() {
   return (
-    <section id="tracking" className="relative py-24 sm:py-32">
+    <section id="tracking" className="relative overflow-hidden py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-6">
         <SectionHeading
           eyebrow="Persistent Insured Tracking"
@@ -148,18 +148,18 @@ export default function Capabilities() {
 
         <div className="mt-16 grid gap-6 md:grid-cols-2">
           {CAPABILITIES.map((c, i) => (
-            <Reveal key={c.title} delay={i * 0.08}>
-              <SpotlightCard tilt maxTilt={4} className="group h-full p-7 sm:p-8">
-                <div className="flex h-full flex-col">
-                  <div className="flex items-start justify-between">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-linear-to-br from-brand-teal/20 to-brand-cyan/5 ring-1 ring-brand-cyan/25 transition-all duration-300 group-hover:shadow-[0_0_24px_rgba(0,229,255,0.4)] group-hover:ring-brand-cyan/60">
+            <Reveal key={c.title} delay={i * 0.08} className="min-w-0">
+              <SpotlightCard tilt maxTilt={4} className="group h-full min-w-0 p-6 sm:p-8">
+                <div className="flex h-full min-w-0 flex-col">
+                  <div className="flex items-start justify-between gap-2">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-brand-teal/20 to-brand-cyan/5 ring-1 ring-brand-cyan/25 transition-all duration-300 group-hover:shadow-[0_0_24px_rgba(0,229,255,0.4)] group-hover:ring-brand-cyan/60">
                       <c.icon className="h-6 w-6 text-brand-cyan" />
                     </span>
                     <span className="rounded-full border border-white/10 px-2.5 py-1 text-[11px] text-silver">{c.tag}</span>
                   </div>
                   <h3 className="mt-6 font-display text-xl font-semibold text-white">{c.title}</h3>
                   <p className="mt-2 leading-relaxed text-silver">{c.text}</p>
-                  <div className="mt-6 rounded-xl border border-brand-cyan/10 bg-abyss/50 p-4">
+                  <div className="mt-6 min-w-0 overflow-hidden rounded-xl border border-brand-cyan/10 bg-abyss/50 p-3.5 sm:p-4">
                     <c.Visual />
                   </div>
                   <div className="mt-auto flex flex-wrap gap-2 pt-6">
